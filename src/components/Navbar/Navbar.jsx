@@ -1,36 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Drawer, Button } from 'antd';
 import { Link } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
+import MenuItems from './MenuItems';
+import logo from '../../assets/img/logo_transparent_3.png';
+import './Navbar.css';
 
-const { Header } = Layout;
+class MainNavbar extends Component {
+	state = {
+		current: 'home',
+		visible: false
+	};
 
-const navStyle = {
-	float: 'right',
-	lineHeight: '64px'
-};
+	showDrawer = () => {
+		this.setState({
+			visible: !this.state.visible
+		});
+	};
 
-const Navbar = () => {
-	return (
-		<Layout className='layout'>
-			<Header>
-				{/* <div className='logo' /> */}
-				<Menu theme='dark' mode='horizontal' defaultSelectedKeys={['1']} style={navStyle}>
-					<Menu.Item key='1'>
-						<Link to='/'>Home</Link>
-					</Menu.Item>
-					<Menu.Item key='2'>
-						<Link to='/about'>About</Link>
-					</Menu.Item>
-					<Menu.Item key='3'>
-						<Link to='/pricelist'>Price List</Link>
-					</Menu.Item>
-					<Menu.Item key='4'>
-						<Link to='/booking'>Book Online</Link>
-					</Menu.Item>
-				</Menu>
-			</Header>
-		</Layout>
-	);
-};
-
-export default Navbar;
+	render() {
+		return (
+			<nav className='menuBar'>
+				<div className='logo'>
+					<Link to='/'>
+						<img src={logo} alt='Logo' />
+					</Link>
+				</div>
+				<div className='menuCon'>
+					<MenuItems horizontal />
+					<Button className='barsMenu' type='primary' onClick={this.showDrawer}>
+						<span className='barsBtn' />
+					</Button>
+					<Drawer placement='right' closable={false} onClose={this.showDrawer} visible={this.state.visible}>
+						<MenuItems showDrawer={this.showDrawer} />
+					</Drawer>
+				</div>
+			</nav>
+		);
+	}
+}
+export default MainNavbar;
