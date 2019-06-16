@@ -19,14 +19,12 @@ ReactDOM.render(
 		<Navbar />
 		<Layout className='layout'>
 			<Switch>
-				<Layout.Content>
 					<Route exact path='/' component={Home} />
 					<Route path='/about' component={About} />
 					<Route path='/pricelist' component={PriceList} />
 					<Route path='/staff' component={Staff} />
 					<Route path='/contact' component={Contact} />
 					<Route path='/booking' component={Booking} />
-				</Layout.Content>
 			</Switch>
 			<Footer/>
 		</Layout>
