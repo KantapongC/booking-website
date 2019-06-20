@@ -1,7 +1,7 @@
 .menuBar {
 	padding: 0 20px;
 	border-bottom: solid 1px #e8e8e8;
-	overflow: auto;
+	overflow: hidden;
 	box-shadow: 0 0 30px #141414;
 	position: relative;
 	/* box-shadow: 0 0 30px #f3f1f1; */
@@ -88,7 +88,7 @@
 	border-bottom-color: transparent;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
 	.barsMenu {
 		display: inline-block;
 	}
@@ -101,7 +101,7 @@
 	.logo a,
 	img {
 		margin-left: -20px;
-		padding: 10px 20px;
+		padding: 0px 20px;
 	}
 	.menuCon .ant-menu-item,
 	.menuCon .ant-menu-submenu-title {
