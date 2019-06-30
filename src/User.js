@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import Navbar from './components/Navbar/Navbar';
@@ -15,25 +15,24 @@ import Footer from './components/Footer/Footer';
 export default class User extends Component {
 	render() {
 		return (
-			<div>
+			<Router>
 				<Layout className='layout'>
 					<Layout.Header>
 						<Navbar />
 					</Layout.Header>
-				</Layout>
-				<Switch>
-					<Route path='/admin' component={Dashboard} />
-					<Route exact path='/' component={Home} />
-					<Route path='/about' component={About} />
-					<Route path='/pricelist' component={PriceList} />
-					<Route path='/staff' component={Staff} />
-					<Route path='/contact' component={Contact} />
-					<Route path='/booking' component={Booking} />
-				</Switch>
-				<Layout>
+					<Layout.Content>
+						<Switch>
+							<Route exact path='/' component={Home} />
+							<Route path='/about' component={About} />
+							<Route path='/pricelist' component={PriceList} />
+							<Route path='/staff' component={Staff} />
+							<Route path='/contact' component={Contact} />
+							<Route path='/booking' component={Booking} />
+						</Switch>
+					</Layout.Content>
 					<Footer />
 				</Layout>
-			</div>
+			</Router>
 		);
 	}
 }
