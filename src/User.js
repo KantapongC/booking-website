@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import Navbar from './components/Navbar/Navbar';
-import Dashboard from './views/Admin/Dashboard';
 import Home from './views/Home/Home';
 import About from './views/About/About';
 import PriceList from './views/PriceList/PriceList';

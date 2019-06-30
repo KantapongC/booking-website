@@ -14,3 +14,7 @@ code {
 	position: relative;
 	/* z-index: 1; */
 }
+
+.ant-layout-header {
+	height: 92px !important;
+}
