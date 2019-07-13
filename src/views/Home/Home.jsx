@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Carousel } from 'antd';
 import './Home.css';
-import img_5 from './img/img_5.jpg';
-import img_6 from './img/img_6.jpg';
-import img_7 from './img/img_7.jpg';
-import img_8 from './img/img_8.jpg';
+import img_5 from './img_compressed/img_5.jpg';
+import img_6 from './img_compressed/img_6.jpg';
+import img_7 from './img_compressed/img_7.jpg';
+import img_8 from './img_compressed/img_8.jpg';
 
 export default class Home extends Component {
 	render() {

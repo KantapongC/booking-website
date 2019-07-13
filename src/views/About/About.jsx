@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Typography, Button } from 'antd';
 import MediaQuery from 'react-responsive';
 
-import portrait from './img/barber.jpg';
+import portrait from './img/barber_compressed.jpg';
 import './About.css';
 
 const { Title, Paragraph } = Typography;

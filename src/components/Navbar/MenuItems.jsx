@@ -4,7 +4,7 @@ import { Menu } from 'antd';
 
 const MenuItems = ({ horizontal, showDrawer }) => {
 	return (
-		<Menu mode={horizontal ? 'horizontal' : 'vertical'} defaultSelectedKeys='home'>
+		<Menu mode={horizontal ? 'horizontal' : 'vertical'} defaultSelectedKeys={['home']}>
 			<Menu.Item key='home'>
 				<Link to='/' onClick={showDrawer}>
 					Home
