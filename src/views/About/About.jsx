@@ -3,7 +3,7 @@ import { Row, Col, Typography, Button } from 'antd';
 import MediaQuery from 'react-responsive';
 
 import portrait from './img/barber_compressed.jpg';
-import './About.css';
+// import './About.css';
 
 const { Title, Paragraph } = Typography;
 

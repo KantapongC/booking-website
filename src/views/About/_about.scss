@@ -1,0 +1,113 @@
+.about-portrait,
+.about-responsive {
+	img {
+		width: 100%;
+		height: 100vh;
+		object-fit: cover;
+	}
+}
+.about-content {
+	/* position: relative; */
+	padding: 50px 100px;
+	width: 100%;
+	height: 100vh;
+	background-color: rgb(175, 175, 175);
+	.about-content-wrapper {
+		position: absolute;
+		width: 75%;
+		top: 45%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	.about-header {
+		padding-top: 50px;
+		font-size: 2rem;
+		text-transform: capitalize;
+	}
+	.about-text {
+		padding-top: 30px;
+		font-size: 1.2rem;
+	}
+	.contact-btn {
+		padding-top: 60px;
+		display: flex;
+		justify-content: center;
+		.ant-btn-lg {
+			height: 60px;
+			padding: 0 15px;
+			font-size: 20px;
+			border-radius: 12px;
+		}
+		.ant-btn-primary {
+			background-color: black;
+		}
+	}
+}
+.about-responsive {
+	img {
+		padding: 0px;
+		margin: 0px;
+		width: 100%;
+		position: relative;
+		filter: blur(2px) brightness(50%);
+	}
+	.about-content-responsive {
+		padding: 0px;
+		position: absolute;
+		display: block;
+		z-index: 1;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-transform: capitalize;
+		width: 70%;
+		.about-header-responsive,
+		.about-text-responsive {
+			color: #fff;
+			text-align: center;
+		}
+		.about-text-responsive {
+			text-align: left;
+		}
+		.contact-btn-responsive {
+			padding-top: 30px;
+			display: flex;
+			justify-content: center;
+		}
+		.contact-btn {
+			.ant-btn-primary {
+				background-color: black;
+			}
+		}
+	}
+}
+@media screen and (max-width: 1024px) {
+	.about-content {
+		padding: 30px 50px;
+		.about-header {
+			padding-top: 20px;
+		}
+		.about-text {
+			padding-top: 0;
+		}
+		.contact-btn {
+			padding-top: 20px;
+		}
+	}
+}
+@media screen and (max-width: 768px) {
+	.about-content {
+		padding: 20px 40px;
+		.about-header {
+			padding: 20px 0px;
+			font-size: 1.5rem;
+		}
+		.about-text {
+			padding-top: 0;
+			font-size: 1rem;
+		}
+		.contact-btn {
+			padding-top: 30px;
+		}
+	}
+}
