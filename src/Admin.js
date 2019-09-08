@@ -17,9 +17,9 @@ class Admin extends Component {
 
 	render() {
 		return (
-			<div>
+			<React.Fragment>
 				{this.state.isLogin ? <AdminDashboard /> : <Login setLogin={this.setLogin} isLogin={this.state.isLogin} />}
-			</div>
+			</React.Fragment>
 		);
 	}
 }
