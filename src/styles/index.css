@@ -187,6 +187,31 @@
   }
 }
 
+.ant-layout-has-sider .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+.ant-layout-has-sider .trigger:hover {
+  color: #acacac;
+}
+
+.ant-layout-has-sider .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.ant-layout-has-sider .ant-menu-dark,
+.ant-layout-has-sider .ant-menu-dark .ant-menu-sub,
+.ant-layout-has-sider .ant-layout-sider {
+  background: #001529 !important;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
