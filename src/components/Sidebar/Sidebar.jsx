@@ -1,11 +1,15 @@
 import React from 'react';
 import { Icon, Menu, Layout } from 'antd';
 import { Link } from 'react-router-dom';
+import logo from '../../assets/img/logo_transparent_3.png';
+import salonSpinnerlogo from '../../assets/img/logo_transparent_spinner.png';
 
 const Sidebar = ({ collapsed, onCollapse }) => {
 	return (
-		<Layout.Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-			<div className='sidebar-logo' />
+		<Layout.Sider collapsible collapsed={collapsed} onCollapse={onCollapse} width='300' breakpoint='lg'>
+			<div className='sidebar-logo'>
+				<img className={!collapsed ? 'sidebar-logo-img' : null} src={collapsed ? salonSpinnerlogo : logo} alt='Logo' />
+			</div>
 			<Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
 				<Menu.Item key='1'>
 					<Link to='/admin/dashboard'>

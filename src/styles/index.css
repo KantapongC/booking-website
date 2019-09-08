@@ -188,9 +188,21 @@
 }
 
 .sidebar-logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
+  height: 80px;
   margin: 16px;
+  overflow: hidden;
+}
+
+.sidebar-logo img {
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+
+.sidebar-logo .sidebar-logo-img {
+  margin: -20% 15%;
+  width: 70%;
 }
 
 body {
