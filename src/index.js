@@ -4,13 +4,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './styles/index.css';
 import * as serviceWorker from './serviceWorker';
 
-import AdminLogin from './Admin';
+import Admin from './Admin';
 import User from './User';
 
 ReactDOM.render(
 	<Router>
 		<Switch>
-			<Route path='/admin' component={AdminLogin} />
+			<Route path='/admin' component={Admin} />
 			<Route component={User} />
 		</Switch>
 	</Router>,
