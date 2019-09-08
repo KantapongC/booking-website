@@ -187,20 +187,7 @@
   }
 }
 
-.ant-layout-has-sider .trigger {
-  font-size: 18px;
-  line-height: 64px;
-  padding: 0 24px;
-  cursor: pointer;
-  -webkit-transition: color 0.3s;
-  transition: color 0.3s;
-}
-
-.ant-layout-has-sider .trigger:hover {
-  color: #acacac;
-}
-
-.ant-layout-has-sider .logo {
+.ant-layout-has-sider .sidebar-logo {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;

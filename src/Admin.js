@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Login from './views/Login/Login';
-import AdminDashboard from './views/Admin/Dashboard';
+import Login from './views/Admin/Login/Login';
+import AdminMain from './views/Admin/Main/Admin';
 
 class Admin extends Component {
 	constructor(props) {
@@ -18,7 +18,7 @@ class Admin extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				{this.state.isLogin ? <AdminDashboard /> : <Login setLogin={this.setLogin} isLogin={this.state.isLogin} />}
+				{this.state.isLogin ? <AdminMain /> : <Login setLogin={this.setLogin} isLogin={this.state.isLogin} />}
 			</React.Fragment>
 		);
 	}

@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import Navbar from './components/Navbar/Navbar';
-import Home from './views/Home/Home';
-import About from './views/About/About';
-import PriceList from './views/PriceList/PriceList';
-import Staff from './views/Staff/Staff';
-import Contact from './views/Contact/Contact';
-import Booking from './views/Booking/Booking';
 import Footer from './components/Footer/Footer';
+import Home from './views/User/Home/Home';
+import About from './views/User/About/About';
+import PriceList from './views/User/PriceList/PriceList';
+import Staff from './views/User/Staff/Staff';
+import Contact from './views/User/Contact/Contact';
+import Booking from './views/User/Booking/Booking';
 
 export default class User extends Component {
 	render() {
