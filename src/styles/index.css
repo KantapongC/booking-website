@@ -187,16 +187,10 @@
   }
 }
 
-.ant-layout-has-sider .sidebar-logo {
+.sidebar-logo {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
-}
-
-.ant-layout-has-sider .ant-menu-dark,
-.ant-layout-has-sider .ant-menu-dark .ant-menu-sub,
-.ant-layout-has-sider .ant-layout-sider {
-  background: #001529 !important;
 }
 
 body {
@@ -216,7 +210,8 @@ code {
 }
 
 .ant-layout-header {
-  height: 92px !important;
+  height: 91px !important;
+  background: #ffffff !important;
 }
 
 .loading {
