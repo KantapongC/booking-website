@@ -29,7 +29,7 @@ export default class User extends Component {
 							<Route path='/booking' component={Booking} />
 						</Switch>
 					</Layout.Content>
-					<Footer />
+					<Footer darkBackground/>
 				</Layout>
 			</Router>
 		);
