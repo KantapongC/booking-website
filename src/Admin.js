@@ -12,7 +12,9 @@ class Admin extends Component {
 	}
 
 	setLogin = () => {
-		this.setState({ isLogin: true });
+		this.setState(prevState => {
+			return { isLogin: !prevState.isLogin };
+		});
 	};
 
 	render() {
