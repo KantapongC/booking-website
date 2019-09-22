@@ -30,8 +30,8 @@ class AdminMain extends Component {
 					<Sidebar collapsed={this.state.collapsed} onCollapse={this.onCollapse} />
 					<Layout>
 						<Layout.Header style={{ background: '#fff', padding: 0 }} />
-						<Layout.Content style={{ margin: '0 16px' }}>
-							<div style={{ 'margin-top': '16px', padding: 24, background: '#fff', height: '100%' }}>
+						<Layout.Content style={{ margin: '0 16px', minHeight: 'unset' }}>
+							<div style={{ marginTop: '16px', padding: 24, background: '#fff', height: '100%' }}>
 								<Switch>
 									<Route exact path='/admin/dashboard' component={Dashboard} />
 									<Route exact path='/admin/service' component={Service} />
