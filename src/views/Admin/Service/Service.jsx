@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
 import { serviceHeader } from '../../../variables/Variables';
-import EditableTable from '../../../components/EditableTable/EditableTable';
+import MenuTable from '../../../components/Table/Table';
+import ServiceModal from '../../../components/Modal/ServiceModal';
 
 class Service extends Component {
 	constructor(props) {
@@ -33,9 +34,14 @@ class Service extends Component {
 					blowDry: 'Pan',
 					wash: 'Vaew'
 				}
-			]
+			],
+			visible: false
 		};
 	}
+
+	handleOnClick = () => {
+		this.setState(prevState => ({ visible: !prevState.visible }));
+	};
 
 	handleDelete = key => {
 		const data = [...this.state.data];
@@ -74,10 +80,11 @@ class Service extends Component {
 	render() {
 		return (
 			<>
-				<Button onClick={this.handleAdd} type='primary' style={{ marginBottom: 16 }}>
+				<Button onClick={this.handleOnClick} type='primary' style={{ marginBottom: 16 }}>
 					Add a row
 				</Button>
-				<EditableTable
+				<ServiceModal visible={this.state.visible} />
+				<MenuTable
 					title='รายการวันนี้'
 					tableHeader={serviceHeader}
 					tableData={this.state.data}
