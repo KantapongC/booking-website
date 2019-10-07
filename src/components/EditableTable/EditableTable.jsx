@@ -50,13 +50,14 @@ const EditableTable = ({ tableHeader, title, handleSave, tableData, handleDelete
 		};
 	});
 
+	const today = new Date().toDateString();
 	return (
 		<Table
 			components={components}
 			rowClassName={() => 'editable-row'}
 			columns={tableColumn}
 			dataSource={tableData}
-			title={() => <h2>{title}</h2>}
+			title={() => <h2>{title + ' ' + today}</h2>}
 			bordered
 			// pagination={{ position: 'bottom' }}
 			pagination={false}
