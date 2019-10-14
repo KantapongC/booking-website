@@ -80,10 +80,8 @@ class Service extends Component {
 	render() {
 		return (
 			<>
-				<Button onClick={this.handleOnClick} type='primary' style={{ marginBottom: 16 }}>
-					Add a row
-				</Button>
-				<ServiceModal visible={this.state.visible} />
+				<Button onClick={this.handleOnClick} icon='plus' style={{ marginBottom: 16 }} shape='circle' size='large'/>
+				<ServiceModal visible={this.state.visible} cancel={this.handleOnClick}/>
 				<MenuTable
 					title='รายการวันนี้'
 					tableHeader={serviceHeader}
