@@ -31,13 +31,13 @@ class ServiceModal extends PureComponent {
 	};
 
 	render() {
-		const { item = {}, onOk, form, ...modalProps } = this.props;
+		const { item = {}, onOk, form, cancel, ...modalProps } = this.props;
 		const { getFieldDecorator } = form;
 
 		return (
-			<Modal {...modalProps} onOk={this.handleOk}>
+			<Modal {...modalProps} onOk={this.handleOk} onCancel={cancel}>
 				<Form layout='horizontal'>
-					<FormItem label={i18n.t`Name`} hasFeedback {...formItemLayout}>
+					<FormItem label={'i18n.t`Name`'} hasFeedback {...formItemLayout}>
 						{getFieldDecorator('name', {
 							initialValue: item.name,
 							rules: [
@@ -91,7 +91,7 @@ class ServiceModal extends PureComponent {
 								{
 									required: true,
 									pattern: /^1[34578]\d{9}$/,
-									message: i18n.t`The input is not valid phone!`
+									message: 'i18n.t`The input is not valid phone!`'
 								}
 							]
 						})(<Input />)}
@@ -103,7 +103,7 @@ class ServiceModal extends PureComponent {
 								{
 									required: true,
 									pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/,
-									message: i18n.t`The input is not valid E-mail!`
+									message: 'i18n.t`The input is not valid E-mail!`'
 								}
 							]
 						})(<Input />)}
@@ -116,7 +116,7 @@ class ServiceModal extends PureComponent {
 									required: true
 								}
 							]
-						})(<Cascader style={{ width: '100%' }} placeholder={i18n.t`Pick an address`} />)}
+						})(<Cascader style={{ width: '100%' }} placeholder={'i18n.t`Pick an address`'} />)}
 					</FormItem>
 				</Form>
 			</Modal>
@@ -124,4 +124,6 @@ class ServiceModal extends PureComponent {
 	}
 }
 
-export default ServiceModal;
+const ServiceModalForm = Form.create()(ServiceModal);
+
+export default ServiceModalForm;
