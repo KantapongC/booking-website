@@ -26,12 +26,12 @@ class AdminMain extends Component {
 	render() {
 		return (
 			<Router>
-				<Layout style={{ height: '100vh' }}>
+				<Layout className='admin-layout' hasSider>
 					<Sidebar collapsed={this.state.collapsed} onCollapse={this.onCollapse} />
-					<Layout>
-						<Layout.Header style={{ background: '#fff', padding: 0 }} />
-						<Layout.Content style={{ margin: '0 16px', minHeight: 'unset' }}>
-							<div style={{ marginTop: '16px', padding: 24, background: '#fff', height: '100%' }}>
+					<Layout className='admin-layout'>
+						<Layout.Header className='admin-layout-header' />
+						<Layout.Content className='admin-layout-content'>
+							<div className='content-card'>
 								<Switch>
 									<Route exact path='/admin/dashboard' component={Dashboard} />
 									<Route exact path='/admin/service' component={Service} />

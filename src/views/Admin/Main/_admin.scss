@@ -1,0 +1,19 @@
+.admin-layout {
+	height: 100vh;
+	.admin-layout-header {
+		background: #ffffff;
+		padding: 0;
+		// line-height: 30px;
+		// height: 30px
+	}
+	.admin-layout-content {
+		margin: 0 16px;
+		min-height: unset;
+	}
+	.content-card {
+		margin-top: 16px;
+		padding: 24px;
+		background: #ffffff;
+		height: 100%;
+	}
+}
