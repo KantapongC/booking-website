@@ -35,60 +35,63 @@ class Service extends Component {
 					wash: 'Vaew'
 				}
 			],
-			visible: false
+			visible: false,
+			selectedRecord: {},
+			isUpdate: false
 		};
 	}
 
 	handleOnClick = () => {
-		this.setState(prevState => ({ visible: !prevState.visible }));
+		this.setState(prevState => ({ visible: !prevState.visible, isUpdate: false }));
 	};
 
-	handleDelete = key => {
+	handleOnCancel = () => {
+		this.setState(prevState => ({ visible: !prevState.visible, isUpdate: true }));
+	};
+
+	handleDelete = () => {
 		const data = [...this.state.data];
-		this.setState({ data: data.filter(item => item.key !== key) });
+		this.setState({ data: data.filter(item => item.key !== this.state.selectedRecord.key), visible: false, selectedRecord: {} });
 	};
 
-	handleAdd = () => {
-		const { count, data } = this.state;
-		const defaultField = serviceHeader.map(item => item.dataIndex);
-
-		let newData = {
-			key: count
-		};
-
-		defaultField.forEach(element => (newData[element] = '-'));
+	handleAdd = newData => {
+		const { data } = this.state;
 
 		this.setState({
 			data: [...data, newData],
-			count: count + 1
+			visible: false,
+			selectedRecord: {}
 		});
 	};
 
-	handleSave = row => {
-		const newData = [...this.state.data];
-		const index = newData.findIndex(item => row.key === item.key);
-		const item = newData[index];
+	handleUpdate = newData => {
+		const data = [...this.state.data];
+		const index = data.findIndex(item => this.state.selectedRecord.key === item.key);
+		data[index] = newData;
 
-		newData.splice(index, 1, {
-			...item,
-			...row
-		});
+		this.setState({ data, visible: false, selectedRecord: {} });
+	};
 
-		this.setState({ data: newData });
+	onRowClick = record => {
+		this.setState({ visible: true, isUpdate: true, selectedRecord: record });
 	};
 
 	render() {
 		return (
 			<>
-				<Button onClick={this.handleOnClick} icon='plus' style={{ marginBottom: 16 }} shape='circle' size='large'/>
-				<ServiceModal visible={this.state.visible} cancel={this.handleOnClick}/>
-				<MenuTable
-					title='รายการวันนี้'
-					tableHeader={serviceHeader}
-					tableData={this.state.data}
-					handleSave={this.handleSave}
-					handleDelete={this.handleDelete}
+				<Button onClick={this.handleOnClick} icon='plus' style={{ marginBottom: 16 }} shape='round' size='large'>
+					เพิ่มรายการใหม่
+				</Button>
+				<ServiceModal
+					visible={this.state.visible}
+					onCancel={this.handleOnCancel}
+					onOk={this.handleAdd}
+					record={this.state.selectedRecord}
+					isUpdate={this.state.isUpdate}
+					handleUpdate={this.handleUpdate}
+					onDelete={this.handleDelete}
 				/>
+				<MenuTable title='รายการวันนี้' tableHeader={serviceHeader} tableData={this.state.data} handleDelete={this.handleDelete} onRowClick={this.onRowClick} />
 			</>
 		);
 	}

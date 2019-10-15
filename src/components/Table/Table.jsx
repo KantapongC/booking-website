@@ -1,7 +1,7 @@
 import React from 'react';
-import { Table, Form, Popconfirm } from 'antd';
+import { Table, Popconfirm } from 'antd';
 
-const MenuTable = ({ tableHeader, title, tableData, handleDelete }) => {
+const MenuTable = ({ tableHeader, title, tableData, handleDelete, onRowClick }) => {
 	const header = [
 		...tableHeader,
 		{
@@ -10,7 +10,7 @@ const MenuTable = ({ tableHeader, title, tableData, handleDelete }) => {
 			render: (text, record) =>
 				tableData.length >= 1 ? (
 					<Popconfirm title='Confirm Delete' onConfirm={() => handleDelete(record.key)}>
-						<a>Delete</a>
+						<a href='/' >Delete</a>
 					</Popconfirm>
 				) : null
 		}
@@ -19,12 +19,13 @@ const MenuTable = ({ tableHeader, title, tableData, handleDelete }) => {
 	const today = new Date().toDateString();
 	return (
 		<Table
-			columns={header}
+			columns={tableHeader}
 			dataSource={tableData}
 			title={() => <h2>{title + ' ' + today}</h2>}
 			bordered
 			// pagination={{ position: 'bottom' }}
 			pagination={false}
+			onRowClick={onRowClick}
 		/>
 	);
 };

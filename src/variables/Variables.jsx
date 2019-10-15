@@ -89,3 +89,109 @@ export const serviceHeader = [
     editable: true,
 	}
 ];
+
+//
+// //
+// // // For Form Items
+// //
+//
+export const serviceItems = [
+	{
+		title: 'รายการ',
+		dataIndex: 'serviceName',
+		hasOptions: true,
+		isRequired: true,
+		type: 'string'
+	},
+	{
+		title: 'ราคา',
+		dataIndex: 'price',
+		hasOptions: false,
+		isRequired: true,
+		type: 'number'
+	},
+	{
+		title: 'สระ',
+		dataIndex: 'wash',
+		hasOptions: true,
+		isRequired: false,
+		type: 'string'
+	},
+	{
+		title: 'ไดร์',
+		dataIndex: 'blowDry',
+		hasOptions: true,
+		isRequired: false,
+		type: 'string'
+	},
+	{
+		title: 'ซอย',
+		dataIndex: 'thin',
+		hasOptions: true,
+		isRequired: false,
+		type: 'string'
+	},
+	{
+		title: 'อบไอน้ำ',
+		dataIndex: 'steam',
+		hasOptions: true,
+		isRequired: false,
+		type: 'string'
+	},
+	{
+		title: 'ทำสี',
+		dataIndex: 'tint',
+		hasOptions: true,
+		isRequired: false,
+		type: 'string'
+	},
+	{
+		title: 'เคลือบ',
+		dataIndex: 'coat',
+		hasOptions: true,
+		isRequired: false,
+		type: 'string'
+	},
+	{
+		title: 'สปาผม',
+		dataIndex: 'hairSpa',
+		hasOptions: true,
+		isRequired: false,
+		type: 'string'
+	},
+	{
+		title: 'ตัด',
+		dataIndex: 'cut',
+		hasOptions: true,
+		isRequired: false,
+		type: 'string'
+	},
+	{
+		title: 'เล็บ',
+		dataIndex: 'nail',
+		hasOptions: true,
+		isRequired: false,
+		type: 'string'
+	},
+	{
+		title: 'นวด',
+		dataIndex: 'massage',
+		hasOptions: true,
+		isRequired: false,
+		type: 'string'
+	},
+	{
+		title: 'สินค้า',
+		dataIndex: 'product',
+		hasOptions: true,
+		isRequired: false,
+		type: 'string'
+	},
+	{
+		title: 'ลูกค้า',
+		dataIndex: 'customer',
+		hasOptions: false,
+		isRequired: false,
+		type: 'string'
+	}
+];
