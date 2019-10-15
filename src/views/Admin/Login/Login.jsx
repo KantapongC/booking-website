@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
 import FullScreenLoader from '../../../components/FullScreenLoader/FullScreenLoader';
-import './Login.css';
 import logo from '../../../assets/img/logo_transparent_3.png';
 
 class Login extends Component {
