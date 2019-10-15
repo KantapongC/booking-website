@@ -15,8 +15,8 @@ export default class User extends Component {
 	render() {
 		return (
 			<Router>
-				<Layout className='layout'>
-					<Layout.Header>
+				<Layout className='user-layout'>
+					<Layout.Header className='user-layout-header'>
 						<Navbar />
 					</Layout.Header>
 					<Layout.Content>
@@ -29,7 +29,7 @@ export default class User extends Component {
 							<Route path='/booking' component={Booking} />
 						</Switch>
 					</Layout.Content>
-					<Footer darkBackground/>
+					<Footer darkBackground />
 				</Layout>
 			</Router>
 		);

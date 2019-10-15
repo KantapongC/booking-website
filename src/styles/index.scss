@@ -1,6 +1,8 @@
 @import '../views/User/About/about';
 @import '../views/User/Home/home';
 @import '../components/Sidebar/sidebar';
+@import '../views/Admin/Login/login';
+@import '../views/Admin/Main/admin';
 
 body {
 	margin: 0;
@@ -13,12 +15,12 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.layout {
+.user-layout {
 	position: relative;
 	/* z-index: 1; */
 }
 
-.ant-layout-header {
+.user-layout-header {
 	height: 91px !important;
 	background: #ffffff !important;
 }
