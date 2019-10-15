@@ -78,14 +78,18 @@ class ServiceModal extends PureComponent {
 														<Option value='Jiangsu'>Jiangsu</Option>
 													</Select>
 												) : item.type === 'number' ? (
-													<InputNumber defaultValue={0} formatter={value => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={value => value.replace(/฿\s?|(,*)/g, '')} />
+													<InputNumber
+														defaultValue={0}
+														formatter={value => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+														parser={value => value.replace(/฿\s?|(,*)/g, '')}
+													/>
 												) : (
 													<Input />
 												)
 											)}
 										</FormItem>
 									);
-								}
+								} else return null;
 							})}
 						</Col>
 						<Col span={12}>
@@ -108,14 +112,18 @@ class ServiceModal extends PureComponent {
 														<Option value='Jiangsu'>Jiangsu</Option>
 													</Select>
 												) : item.type === 'number' ? (
-													<InputNumber defaultValue={0} formatter={value => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={value => value.replace(/฿\s?|(,*)/g, '')} />
+													<InputNumber
+														defaultValue={0}
+														formatter={value => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+														parser={value => value.replace(/฿\s?|(,*)/g, '')}
+													/>
 												) : (
 													<Input />
 												)
 											)}
 										</FormItem>
 									);
-								}
+								} else return null;
 							})}
 						</Col>
 					</Row>

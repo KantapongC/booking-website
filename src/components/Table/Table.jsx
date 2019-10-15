@@ -1,22 +1,9 @@
 import React from 'react';
-import { Table, Popconfirm } from 'antd';
+import { Table } from 'antd';
 
-const MenuTable = ({ tableHeader, title, tableData, handleDelete, onRowClick }) => {
-	const header = [
-		...tableHeader,
-		{
-			title: 'Action',
-			align: 'center',
-			render: (text, record) =>
-				tableData.length >= 1 ? (
-					<Popconfirm title='Confirm Delete' onConfirm={() => handleDelete(record.key)}>
-						<a href='/' >Delete</a>
-					</Popconfirm>
-				) : null
-		}
-	];
-
+const MenuTable = ({ tableHeader, title, tableData, onRowClick }) => {
 	const today = new Date().toDateString();
+
 	return (
 		<Table
 			columns={tableHeader}
