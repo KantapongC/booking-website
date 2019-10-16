@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { Form, Input, Modal, Select, InputNumber, Row, Col, Button } from 'antd';
-
 import { serviceItems } from '../../variables/Variables';
 
 const FormItem = Form.Item;

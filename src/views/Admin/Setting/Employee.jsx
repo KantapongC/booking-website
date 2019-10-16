@@ -23,11 +23,11 @@ class EmployeeSetting extends Component {
 		return (
 			<>
 				<Row gutter={48}>
-					<Col md={8} style={{ padding: '24px' }}>
+					<Col md={6} style={{ padding: '24px' }}>
 						<NewUserCard></NewUserCard>
 					</Col>
 					{employees.map(employee => (
-						<Col md={8} style={{ padding: '24px' }}>
+						<Col md={6} style={{ padding: '24px' }}>
 							<UserCard employee={employee} />
 						</Col>
 					))}
