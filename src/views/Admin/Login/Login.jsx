@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
 import FullScreenLoader from '../../../components/FullScreenLoader/FullScreenLoader';
 import logo from '../../../assets/img/logo_transparent_3.png';
+import { signIn } from '../../../store/actions/authActions';
+import { connect } from 'react-redux';
 
 class Login extends Component {
 	constructor(props) {
@@ -14,24 +16,30 @@ class Login extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
-		this.props.form.validateFields((err, values) => {
-			if (!err) {
-				console.log('Received values of form: ', values);
-			}
+		this.setState({ isPressed: !this.state.isPressed });
+
+		const { form } = this.props;
+		const { validateFields, resetFields } = form;
+		validateFields((err, credential) => {
+			if (err) return;
+
+			this.props.signIn(credential);
 		});
 
-		this.setState({ isPressed: !this.state.isPressed });
-		setTimeout(() => {
-			this.props.setLogin();
-		}, 1000);
+		resetFields();
 	};
 
 	render() {
-		const { getFieldDecorator } = this.props.form;
+		const {
+			state: { isPressed },
+			props: { auth, form },
+			handleSubmit
+		} = this;
+		const { getFieldDecorator } = form;
 
-		if (!this.props.isLogin && this.state.isPressed) return <FullScreenLoader />;
+		if (!auth.uid && isPressed) return <FullScreenLoader />;
 		return (
-			<Form onSubmit={this.handleSubmit} className='login-form'>
+			<Form onSubmit={handleSubmit} className='login-form'>
 				<Form.Item>
 					<div className='login-logo'>
 						<img src={logo} alt='Logo' />
@@ -68,4 +76,19 @@ class Login extends Component {
 
 const LoginForm = Form.create({ name: 'normal_login' })(Login);
 
-export default LoginForm;
+const mapStateToProps = state => {
+	return {
+		auth: state.firebase.auth
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		signIn: credential => dispatch(signIn(credential))
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(LoginForm);

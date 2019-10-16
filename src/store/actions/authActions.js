@@ -8,7 +8,9 @@ export const signIn = credentials => {
 		const firebase = getFirebase();
 
 		try {
-			let email = credentials.email;
+			let email = credentials.username;
+			if (credentials.username.indexOf('@') === -1) email += '@molsalon.com';
+
 			await firebase
 				.auth()
 				.setPersistence(firebase.auth.Auth.Persistence.SESSION)

@@ -11,7 +11,7 @@ import Staff from './views/User/Staff/Staff';
 import Contact from './views/User/Contact/Contact';
 import Booking from './views/User/Booking/Booking';
 
-export default class User extends Component {
+class User extends Component {
 	render() {
 		return (
 			<Router>
@@ -35,3 +35,5 @@ export default class User extends Component {
 		);
 	}
 }
+
+export default User;
