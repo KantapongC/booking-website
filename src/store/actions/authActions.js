@@ -1,7 +1,7 @@
-export const LOGIN_SUCCESS = 'user:login_success';
-export const LOGIN_ERROR = 'user:login_error';
-export const SIGNOUT_SUCCESS = 'user:signout_success';
-export const SIGNOUT_ERROR = 'user:signout_error';
+export const LOGIN_SUCCESS = 'USER:LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'USER:LOGIN_ERROR';
+export const SIGNOUT_SUCCESS = 'USER:SIGNOUT_SUCCESS';
+export const SIGNOUT_ERROR = 'USER:SIGNOUT_ERROR';
 
 export const signIn = credentials => {
 	return async (dispatch, getState, { getFirebase }) => {
