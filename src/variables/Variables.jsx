@@ -204,44 +204,51 @@ export const serviceItems = [
 export const employeeItems = [
 	{
 		title: 'ชื่อเล่น',
-		dataIndex: 'nickName',
+		dataIndex: 'username',
 		hasOptions: false,
 		isRequired: true,
 		type: 'string'
 	},
 	{
 		title: 'เบอร์โทร',
-		dataIndex: 'Telephone',
+		dataIndex: 'phone',
 		hasOptions: false,
 		isRequired: false,
 		type: 'number'
 	},
 	{
 		title: 'ชื่อจริง',
-		dataIndex: 'Firstname',
+		dataIndex: 'firstname',
 		hasOptions: false,
 		isRequired: true,
 		type: 'string'
 	},
 	{
 		title: 'วันเกิด',
-		dataIndex: 'Dob',
+		dataIndex: 'dob',
 		hasOptions: false,
 		isRequired: false,
 		type: 'date'
 	},
 	{
 		title: 'นามสกุล',
-		dataIndex: 'Lastname',
+		dataIndex: 'lastname',
 		hasOptions: false,
 		isRequired: true,
 		type: 'string'
 	},
 	{
 		title: 'ที่อยู่',
-		dataIndex: 'Address',
+		dataIndex: 'address',
 		hasOptions: false,
 		isRequired: false,
 		type: 'address'
+	},
+	{
+		title: 'ตำแหน่ง',
+		dataIndex: 'position',
+		hasOptions: false,
+		isRequired: true,
+		type: 'string'
 	}
 ];

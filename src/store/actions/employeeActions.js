@@ -1,7 +1,7 @@
 export const CREATE_EMPLOYEE_SUCCESS = 'EMPLOYEE:CREATE_SUCCESS';
 export const CREATE_EMPLOYEE_ERROR = 'EMPLOYEE:CREATE_ERROR';
 
-export const createEmployee = (employee) => {
+export const createEmployee = employee => {
 	return async (dispatch, getState, { getFirestore }) => {
 		const firestore = getFirestore();
 		const profile = getState().firebase.profile;
@@ -9,13 +9,10 @@ export const createEmployee = (employee) => {
 		try {
 			await firestore.collection('employees').add({
 				...employee,
-				authorFirstName: profile.firstName,
-				authorLastName: profile.lastName,
-				authorId: authorId,
 				createdAt: new Date()
 			});
 
-			dispatch({ type: CREATE_EMPLOYEE_SUCCESS });
+			dispatch({ type: CREATE_EMPLOYEE_SUCCESS, employee });
 		} catch (error) {
 			dispatch({ type: CREATE_EMPLOYEE_ERROR, error });
 		}

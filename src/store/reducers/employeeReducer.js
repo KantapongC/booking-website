@@ -2,13 +2,11 @@ import { CREATE_EMPLOYEE_SUCCESS, CREATE_EMPLOYEE_ERROR } from '../actions/emplo
 
 const INITIAL_STATE = {};
 
-const employeeReducer = (state = INITIAL_STATE, { type, payload }) => {
+const employeeReducer = (state = INITIAL_STATE, { type, employee, error }) => {
 	switch (type) {
 		case CREATE_EMPLOYEE_SUCCESS:
-			console.log('create employee success');
 			return state;
 		case CREATE_EMPLOYEE_ERROR:
-			console.log('create employee error');
 			return state;
 		default:
 			return state;
