@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import { serviceHeader } from '../../../variables/Variables';
 import MenuTable from '../../../components/Table/Table';
 import ServiceModal from '../../../components/Modal/ServiceModal';
-import { createService } from '../../../store/actions/serviceActions';
+import { createService, updateService } from '../../../store/actions/serviceActions';
 
 const initialState = {
 	serviceName: '',
@@ -65,11 +65,14 @@ class Service extends Component {
 	};
 
 	handleUpdate = newData => {
-		const data = [...this.state.data];
-		const index = data.findIndex(item => this.state.selectedRecord.key === item.key);
-		data[index] = newData;
+		const { updateService } = this.props;
 
-		this.setState({ data, visible: false, selectedRecord: initialState });
+		updateService(newData);
+
+		this.setState({
+			visible: false,
+			selectedRecord: initialState
+		});
 	};
 
 	onRowClick = record => {
@@ -115,7 +118,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		createService: service => dispatch(createService(service))
+		createService: service => dispatch(createService(service)),
+		updateService: service => dispatch(updateService(service))
 	};
 };
 
