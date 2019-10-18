@@ -1,4 +1,7 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 import { Form, Input, Modal, Select, InputNumber, Row, Col, Button } from 'antd';
 import { serviceItems } from '../../variables/Variables';
 
@@ -23,8 +26,8 @@ class ServiceModal extends PureComponent {
 			if (errors) return;
 
 			const data = {
-				...getFieldsValue(),
-				...record
+				...record,
+				...getFieldsValue()
 			};
 
 			if (isUpdate) {
@@ -38,7 +41,7 @@ class ServiceModal extends PureComponent {
 	};
 
 	render() {
-		const { record, form, onCancel, visible, isUpdate, onDelete } = this.props;
+		const { record, form, onCancel, visible, isUpdate, onDelete, employees } = this.props;
 		const { getFieldDecorator } = form;
 
 		return (
@@ -57,74 +60,31 @@ class ServiceModal extends PureComponent {
 				]}>
 				<Form layout='horizontal'>
 					<Row>
-						<Col span={12}>
-							{serviceItems.map((item, key) => {
-								if (key % 2 === 0) {
-									return (
-										<FormItem label={item.title} {...formItemLayout}>
-											{getFieldDecorator(item.dataIndex, {
-												initialValue: record[item.dataIndex],
-												rules: [
-													{
-														required: item.isRequired,
-														...(item.type === 'number' ? { type: item.type } : {})
-													}
-												]
-											})(
-												item.hasOptions ? (
-													<Select defaultValue='Zhejiang'>
-														<Option value='Zhejiang'>Zhejiang</Option>
-														<Option value='Jiangsu'>Jiangsu</Option>
-													</Select>
-												) : item.type === 'number' ? (
-													<InputNumber
-														defaultValue={0}
-														formatter={value => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-														parser={value => value.replace(/฿\s?|(,*)/g, '')}
-													/>
-												) : (
-													<Input />
-												)
-											)}
-										</FormItem>
-									);
-								} else return null;
-							})}
-						</Col>
-						<Col span={12}>
-							{serviceItems.map((item, key) => {
-								if (key % 2 !== 0) {
-									return (
-										<FormItem label={item.title} {...formItemLayout}>
-											{getFieldDecorator(item.dataIndex, {
-												initialValue: record[item.dataIndex],
-												rules: [
-													{
-														required: item.isRequired,
-														...(item.type === 'number' ? { type: item.type } : {})
-													}
-												]
-											})(
-												item.hasOptions ? (
-													<Select defaultValue='Zhejiang'>
-														<Option value='Zhejiang'>Zhejiang</Option>
-														<Option value='Jiangsu'>Jiangsu</Option>
-													</Select>
-												) : item.type === 'number' ? (
-													<InputNumber
-														defaultValue={0}
-														formatter={value => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-														parser={value => value.replace(/฿\s?|(,*)/g, '')}
-													/>
-												) : (
-													<Input />
-												)
-											)}
-										</FormItem>
-									);
-								} else return null;
-							})}
-						</Col>
+						{serviceItems.map((item, key) => {
+							return (
+								<Col span={12}>
+									<FormItem label={item.title} {...formItemLayout}>
+										{getFieldDecorator(item.dataIndex, {
+											initialValue: record[item.dataIndex],
+											rules: [
+												{
+													required: item.isRequired,
+													...(item.type === 'number' ? { type: item.type } : {})
+												}
+											]
+										})(
+											item.hasOptions ? (
+												<Select>{employees && employees.map(employee => <Option value={employee.username}>{employee.username}</Option>)}</Select>
+											) : item.type === 'number' ? (
+												<InputNumber defaultValue={0} formatter={value => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={value => value.replace(/฿\s?|(,*)/g, '')} />
+											) : (
+												<Input />
+											)
+										)}
+									</FormItem>
+								</Col>
+							);
+						})}
 					</Row>
 				</Form>
 			</Modal>
@@ -134,4 +94,13 @@ class ServiceModal extends PureComponent {
 
 const ServiceModalForm = Form.create()(ServiceModal);
 
-export default ServiceModalForm;
+const mapStateToProps = state => {
+	return {
+		employees: state.firestore.ordered.employees
+	};
+};
+
+export default compose(
+	connect(mapStateToProps),
+	firestoreConnect([{ collection: 'employees' }])
+)(ServiceModalForm);
