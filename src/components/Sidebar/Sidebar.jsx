@@ -43,7 +43,7 @@ class Sidebar extends Component {
 					<Menu.Item key='admin/service'>
 						<Link to='/admin/service'>
 							<Icon type='file' />
-							<span>รายการวันนี่้</span>
+							<span>รายการวันนี้</span>
 						</Link>
 					</Menu.Item>
 					<Menu.Item key='admin/employee'>
@@ -57,7 +57,7 @@ class Sidebar extends Component {
 						title={
 							<span>
 								<Icon type='setting' />
-								<span>การตั้งต่า</span>
+								<span>การตั้งค่า</span>
 							</span>
 						}>
 						<Menu.Item key='admin/setting/service'>

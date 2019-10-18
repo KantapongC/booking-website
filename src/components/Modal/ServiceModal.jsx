@@ -61,7 +61,7 @@ class ServiceModal extends PureComponent {
 						</Button>
 					),
 					<Button key='submit' type='primary' onClick={this.handleOk}>
-						เพื่ม
+						{isUpdate ? 'ยืนยัน' : 'เพื่ม'}
 					</Button>
 				]}>
 				<Form layout='horizontal'>
