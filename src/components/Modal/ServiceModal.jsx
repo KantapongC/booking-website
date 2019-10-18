@@ -51,9 +51,15 @@ class ServiceModal extends PureComponent {
 				onOk={this.handleOk}
 				onCancel={onCancel}
 				footer={[
-					<Button key='delete' type='danger' onClick={onDelete}>
-						ลบ
-					</Button>,
+					isUpdate ? (
+						<Button key='delete' type='danger' onClick={onDelete}>
+							ลบ
+						</Button>
+					) : (
+						<Button key='back' type='secondary' onClick={onCancel}>
+							 กลับ
+						</Button>
+					),
 					<Button key='submit' type='primary' onClick={this.handleOk}>
 						เพื่ม
 					</Button>

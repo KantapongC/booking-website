@@ -13,6 +13,8 @@ const MenuTable = ({ tableHeader, title, tableData, onRowClick }) => {
 			// pagination={{ position: 'bottom' }}
 			pagination={false}
 			onRowClick={onRowClick}
+			loading={tableData === null ? true : false}
+			hasData={tableData && tableData.length === 0 ? true : false}
 		/>
 	);
 };
