@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import { serviceHeader } from '../../../variables/Variables';
 import MenuTable from '../../../components/Table/Table';
 import ServiceModal from '../../../components/Modal/ServiceModal';
-import { createService, updateService } from '../../../store/actions/serviceActions';
+import { createService, updateService, deleteService } from '../../../store/actions/serviceActions';
 
 const initialState = {
 	serviceName: '',
@@ -45,9 +45,14 @@ class Service extends Component {
 	};
 
 	handleDelete = () => {
-		const data = [...this.state.data];
+		const {
+			state: { selectedRecord },
+			props: { deleteService }
+		} = this;
+
+		deleteService(selectedRecord);
+
 		this.setState({
-			data: data.filter(item => item.key !== this.state.selectedRecord.key),
 			visible: false,
 			selectedRecord: initialState
 		});
@@ -119,7 +124,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		createService: service => dispatch(createService(service)),
-		updateService: service => dispatch(updateService(service))
+		updateService: service => dispatch(updateService(service)),
+		deleteService: service => dispatch(deleteService(service))
 	};
 };
 
