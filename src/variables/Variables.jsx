@@ -115,84 +115,96 @@ export const serviceItems = [
 		dataIndex: 'wash',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'ไดร์',
 		dataIndex: 'blowDry',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'ซอย',
 		dataIndex: 'thin',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'อบไอน้ำ',
 		dataIndex: 'steam',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'ทำสี',
 		dataIndex: 'tint',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'เคลือบ',
 		dataIndex: 'coat',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'สปาผม',
 		dataIndex: 'hairSpa',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'ตัด',
 		dataIndex: 'cut',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'เล็บ',
 		dataIndex: 'nail',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'นวด',
 		dataIndex: 'massage',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'สินค้า',
 		dataIndex: 'product',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'ลูกค้า',
 		dataIndex: 'customer',
 		hasOptions: false,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	}
 ];
 
