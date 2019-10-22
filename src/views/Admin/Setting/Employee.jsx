@@ -19,7 +19,7 @@ class EmployeeSetting extends Component {
 					{employees &&
 						employees.map(employee => (
 							<Col md={6} style={{ padding: '24px' }}>
-								<UserCard employee={employee} />
+								<UserCard heading={employee.username} subHeading={employee.position} />
 							</Col>
 						))}
 				</Row>
