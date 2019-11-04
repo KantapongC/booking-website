@@ -51,11 +51,11 @@ class ServiceSetting extends PureComponent {
 					ตั้งค่ารายการใหม่
 				</Button>
 				<ServiceNameModal visible={this.state.showModal} record={this.state.selected} closeModal={this.handleOnClick} onOk={createServiceName}></ServiceNameModal>
-				<Row >
+				<Row>
 					{serviceName &&
 						serviceName.map(name => (
-							<Col md={24} style={{ padding: '24px' }}>
-								<ServiceNameCard heading={name.serviceName} subHeading={name.price} />
+							<Col md={24} style={{ paddingBottom: '24px' }}>
+								<ServiceNameCard heading={name.serviceName} subHeading={name.price} content={name} />
 							</Col>
 						))}
 				</Row>
@@ -66,7 +66,8 @@ class ServiceSetting extends PureComponent {
 
 const mapStateToProps = state => {
 	return {
-		serviceName: state.firestore.ordered.serviceName
+		serviceName: state.sampleFirestore.ordered.serviceName
+		// state.firestore.ordered.serviceName
 	};
 };
 
