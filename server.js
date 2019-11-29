@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const cors = require('cors');
 
+const users = require('./routes/api/users');
 // Initialise Express App
 const app = express();
 
@@ -15,13 +16,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // DB Configuration
-const db = require('./config/keys').mongoURI;
+const db = require('./config/keys').localMongoURI;
 
 // Connect to MongoDB Options
 const options = {
 	useUnifiedTopology: true,
 	useNewUrlParser: true,
-	dbName: 'molsalon',
+	dbName: 'molsalon'
 	// useCreateIndex: true,
 	// useFindAndModify: false,
 	// autoIndex: false, // Don't build indexes
@@ -41,6 +42,12 @@ mongoose
 	.catch(error => console.log(error));
 
 app.use(passport.initialize());
+
+//Passport Config
+require('./config/passport')(passport);
+
+// Use Routes
+app.use('api/users', users);
 
 const port = process.env.PORT || 5000;
 
