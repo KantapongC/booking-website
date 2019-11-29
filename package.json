@@ -1,0 +1,33 @@
+{
+  "name": "mol-salon-web-app",
+  "version": "1.0.0",
+  "description": "Web application for Mol Salon",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KantapongC/mol-salon-web-app.git"
+  },
+  "author": "Kantapong Chanthanawan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KantapongC/mol-salon-web-app/issues"
+  },
+  "homepage": "https://github.com/KantapongC/mol-salon-web-app#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.12",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^12.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}
