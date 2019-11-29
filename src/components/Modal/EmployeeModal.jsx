@@ -15,15 +15,15 @@ const formItemLayout = {
 
 class EmployeeModal extends PureComponent {
 	handleOk = () => {
-		const { record, onOk, form, isUpdate, handleUpdate } = this.props;
+		const { record, onOk, form, isUpdate, handleUpdate, closeModal } = this.props;
 		const { validateFields, getFieldsValue, resetFields } = form;
 
 		validateFields(errors => {
 			if (errors) return;
 
 			const data = {
-				...getFieldsValue(),
-				...record
+				...record,
+				...getFieldsValue()
 			};
 
 			if (isUpdate) {
@@ -32,12 +32,13 @@ class EmployeeModal extends PureComponent {
 				onOk(data);
 			}
 
+			closeModal();
 			resetFields();
 		});
 	};
 
 	render() {
-		const { record, form, onCancel, visible, onDelete } = this.props;
+		const { record, form, closeModal, visible, onDelete } = this.props;
 		const { getFieldDecorator } = form;
 
 		return (
@@ -45,9 +46,9 @@ class EmployeeModal extends PureComponent {
 				title={'เพิ่มพนักงานใหม่'}
 				visible={visible}
 				onOk={() => {}}
-				onCancel={onCancel}
+				onCancel={closeModal}
 				footer={[
-					<Button key='back' type='secondary' onClick={onCancel}>
+					<Button key='back' type='secondary' onClick={closeModal}>
 						กลับ
 					</Button>,
 					<Button key='submit' type='primary' onClick={this.handleOk}>
@@ -58,7 +59,7 @@ class EmployeeModal extends PureComponent {
 					<Row type='flex' justify='center' style={{ marginBottom: '26px' }}>
 						<Avatar size={128} icon='user' />
 					</Row>
-					<Row type='flex' justify='center'>
+					<Row>
 						{employeeItems.map((item, key) => {
 							return (
 								<Col span={12}>

@@ -17,9 +17,9 @@ const formItemLayout = {
 	}
 };
 
-class ServiceModal extends PureComponent {
+class ServiceNameModal extends PureComponent {
 	handleOk = () => {
-		const { record, onOk, form, isUpdate, handleUpdate } = this.props;
+		const { record, onOk, form, isUpdate, handleUpdate, closeModal } = this.props;
 		const { validateFields, getFieldsValue, resetFields } = form;
 
 		validateFields(errors => {
@@ -36,27 +36,28 @@ class ServiceModal extends PureComponent {
 				onOk(data);
 			}
 
+			closeModal();
 			resetFields();
 		});
 	};
 
 	render() {
-		const { record, form, onCancel, visible, isUpdate, onDelete, employees } = this.props;
+		const { record, form, closeModal, visible, isUpdate, onDelete, employees } = this.props;
 		const { getFieldDecorator } = form;
 
 		return (
 			<Modal
-				title={isUpdate ? 'แก้ไขรายการ' : 'เพิ่มรายการวันนี้'}
+				title={isUpdate ? 'แก้ไขรายการ' : 'เพิ่มรายการใหม่'}
 				visible={visible}
 				onOk={this.handleOk}
-				onCancel={onCancel}
+				onCancel={closeModal}
 				footer={[
 					isUpdate ? (
 						<Button key='delete' type='danger' onClick={onDelete}>
 							ลบ
 						</Button>
 					) : (
-						<Button key='back' type='secondary' onClick={onCancel}>
+						<Button key='back' type='secondary' onClick={closeModal}>
 							 กลับ
 						</Button>
 					),
@@ -75,14 +76,14 @@ class ServiceModal extends PureComponent {
 											rules: [
 												{
 													required: item.isRequired,
-													...(item.type === 'number' ? { type: item.type } : {})
+													...(item.type === 'number' || item.suffix === '%' ? { type: 'number' } : {})
 												}
 											]
 										})(
-											item.hasOptions ? (
-												<Select>{employees && employees.map(employee => <Option value={employee.username}>{employee.username}</Option>)}</Select>
-											) : item.type === 'number' ? (
+											item.type === 'number' ? (
 												<InputNumber defaultValue={0} formatter={value => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={value => value.replace(/฿\s?|(,*)/g, '')} />
+											) : item.suffix === '%' ? (
+												<InputNumber defaultValue={0} min={0} max={100} formatter={value => `${value}%`} parser={value => value.replace('%', '')} />
 											) : (
 												<Input />
 											)
@@ -98,15 +99,15 @@ class ServiceModal extends PureComponent {
 	}
 }
 
-const ServiceModalForm = Form.create()(ServiceModal);
+const ServiceNameModalForm = Form.create()(ServiceNameModal);
 
 const mapStateToProps = state => {
 	return {
-		employees: state.firestore.ordered.employees
+		serviceName: state.firestore.ordered.serviceName
 	};
 };
 
 export default compose(
 	connect(mapStateToProps),
-	firestoreConnect([{ collection: 'employees' }])
-)(ServiceModalForm);
+	firestoreConnect([{ collection: 'serviceName' }])
+)(ServiceNameModalForm);

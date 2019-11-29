@@ -115,84 +115,96 @@ export const serviceItems = [
 		dataIndex: 'wash',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'ไดร์',
 		dataIndex: 'blowDry',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'ซอย',
 		dataIndex: 'thin',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'อบไอน้ำ',
 		dataIndex: 'steam',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'ทำสี',
 		dataIndex: 'tint',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'เคลือบ',
 		dataIndex: 'coat',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'สปาผม',
 		dataIndex: 'hairSpa',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'ตัด',
 		dataIndex: 'cut',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'เล็บ',
 		dataIndex: 'nail',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'นวด',
 		dataIndex: 'massage',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'สินค้า',
 		dataIndex: 'product',
 		hasOptions: true,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	},
 	{
 		title: 'ลูกค้า',
 		dataIndex: 'customer',
 		hasOptions: false,
 		isRequired: false,
-		type: 'string'
+		type: 'string',
+		suffix: '%'
 	}
 ];
 
@@ -204,44 +216,51 @@ export const serviceItems = [
 export const employeeItems = [
 	{
 		title: 'ชื่อเล่น',
-		dataIndex: 'nickName',
+		dataIndex: 'username',
 		hasOptions: false,
 		isRequired: true,
 		type: 'string'
 	},
 	{
 		title: 'เบอร์โทร',
-		dataIndex: 'Telephone',
+		dataIndex: 'phone',
 		hasOptions: false,
 		isRequired: false,
 		type: 'number'
 	},
 	{
 		title: 'ชื่อจริง',
-		dataIndex: 'Firstname',
+		dataIndex: 'firstname',
 		hasOptions: false,
 		isRequired: true,
 		type: 'string'
 	},
 	{
 		title: 'วันเกิด',
-		dataIndex: 'Dob',
+		dataIndex: 'dob',
 		hasOptions: false,
 		isRequired: false,
 		type: 'date'
 	},
 	{
 		title: 'นามสกุล',
-		dataIndex: 'Lastname',
+		dataIndex: 'lastname',
 		hasOptions: false,
 		isRequired: true,
 		type: 'string'
 	},
 	{
 		title: 'ที่อยู่',
-		dataIndex: 'Address',
+		dataIndex: 'address',
 		hasOptions: false,
 		isRequired: false,
 		type: 'address'
+	},
+	{
+		title: 'ตำแหน่ง',
+		dataIndex: 'position',
+		hasOptions: false,
+		isRequired: true,
+		type: 'string'
 	}
 ];

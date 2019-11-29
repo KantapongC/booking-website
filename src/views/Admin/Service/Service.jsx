@@ -1,42 +1,37 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 import { Button } from 'antd';
 import { serviceHeader } from '../../../variables/Variables';
 import MenuTable from '../../../components/Table/Table';
 import ServiceModal from '../../../components/Modal/ServiceModal';
+import { createService, updateService, deleteService } from '../../../store/actions/serviceActions';
+
+const initialState = {
+	serviceName: '',
+	price: '',
+	blowDry: '',
+	coat: '',
+	customer: '',
+	cut: '',
+	hairSpa: '',
+	massage: '',
+	nail: '',
+	product: '',
+	steam: '',
+	thin: '',
+	tint: '',
+	wash: ''
+};
 
 class Service extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			count: 4,
-			data: [
-				{
-					key: '1',
-					serviceName: 'Cut',
-					price: 1650,
-					wash: 'Pook',
-					blowDry: 'Mol',
-					cut: 'Mol'
-				},
-				{
-					key: '2',
-					serviceName: 'Tint',
-					price: 3600,
-					massage: 'Lee',
-					wash: 'Pook',
-					tint: 'Mol'
-				},
-				{
-					key: '3',
-					serviceName: 'Wash',
-					price: 300,
-					blowDry: 'Pan',
-					wash: 'Vaew'
-				}
-			],
 			visible: false,
-			selectedRecord: {},
+			selectedRecord: initialState,
 			isUpdate: false
 		};
 	}
@@ -50,26 +45,39 @@ class Service extends Component {
 	};
 
 	handleDelete = () => {
-		const data = [...this.state.data];
-		this.setState({ data: data.filter(item => item.key !== this.state.selectedRecord.key), visible: false, selectedRecord: {} });
+		const {
+			state: { selectedRecord },
+			props: { deleteService }
+		} = this;
+
+		deleteService(selectedRecord);
+
+		this.setState({
+			visible: false,
+			selectedRecord: initialState
+		});
 	};
 
 	handleAdd = newData => {
-		const { data } = this.state;
+		const { createService } = this.props;
+
+		createService(newData);
 
 		this.setState({
-			data: [...data, newData],
 			visible: false,
-			selectedRecord: {}
+			selectedRecord: initialState
 		});
 	};
 
 	handleUpdate = newData => {
-		const data = [...this.state.data];
-		const index = data.findIndex(item => this.state.selectedRecord.key === item.key);
-		data[index] = newData;
+		const { updateService } = this.props;
 
-		this.setState({ data, visible: false, selectedRecord: {} });
+		updateService(newData);
+
+		this.setState({
+			visible: false,
+			selectedRecord: initialState
+		});
 	};
 
 	onRowClick = record => {
@@ -77,6 +85,16 @@ class Service extends Component {
 	};
 
 	render() {
+		const { services } = this.props;
+		const data = services
+			? services.map(service => {
+					return {
+						...service,
+						key: service.id
+					};
+			  })
+			: null;
+
 		return (
 			<>
 				<Button onClick={this.handleOnClick} icon='plus' style={{ marginBottom: 16 }} shape='round' size='large'>
@@ -91,10 +109,30 @@ class Service extends Component {
 					handleUpdate={this.handleUpdate}
 					onDelete={this.handleDelete}
 				/>
-				<MenuTable title='รายการวันนี้' tableHeader={serviceHeader} tableData={this.state.data} handleDelete={this.handleDelete} onRowClick={this.onRowClick} />
+				<MenuTable title='รายการวันนี้' tableHeader={serviceHeader} tableData={data} handleDelete={this.handleDelete} onRowClick={this.onRowClick} />
 			</>
 		);
 	}
 }
 
-export default Service;
+const mapStateToProps = state => {
+	return {
+		services: state.firestore.ordered.services
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		createService: service => dispatch(createService(service)),
+		updateService: service => dispatch(updateService(service)),
+		deleteService: service => dispatch(deleteService(service))
+	};
+};
+
+export default compose(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps
+	),
+	firestoreConnect([{ collection: 'services' }])
+)(Service);

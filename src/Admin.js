@@ -1,29 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Login from './views/Admin/Login/Login';
 import AdminMain from './views/Admin/Main/Admin';
+import { connect } from 'react-redux';
 
-class Admin extends Component {
-	constructor(props) {
-		super(props);
+const Admin = ({ auth }) => {
+	return <>{auth.uid ? <AdminMain /> : <Login />}</>;
+};
 
-		this.state = {
-			isLogin: true
-		};
-	}
-
-	setLogin = () => {
-		this.setState(prevState => {
-			return { isLogin: !prevState.isLogin };
-		});
+const mapStateToProps = state => {
+	return {
+		auth: state.firebase.auth,
 	};
+};
 
-	render() {
-		return (
-			<React.Fragment>
-				{this.state.isLogin ? <AdminMain /> : <Login setLogin={this.setLogin} isLogin={this.state.isLogin} />}
-			</React.Fragment>
-		);
-	}
-}
-
-export default Admin;
+export default connect(mapStateToProps)(React.memo(Admin));

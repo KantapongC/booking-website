@@ -19,11 +19,21 @@ class NewUserCard extends PureComponent {
 	};
 
 	render() {
+		const newEmployee = {
+			username: '',
+			firstname: '',
+			lastname: '',
+			phone: '',
+			dob: '',
+			address: '',
+			position: ''
+		};
+
 		return (
 			<Card style={{ height: 167, textAlign: 'center' }}>
 				<Button onClick={this.handleOnClick} icon='plus' style={{ margin: '15px 0px 26px 0px' }} shape='circle' size='large'></Button>
 				<Meta title='เพิ่มพนักงาน' />
-				<EmployeeModal visible={this.state.showModal} record={{}} onCancel={this.handleOnClick}></EmployeeModal>
+				<EmployeeModal visible={this.state.showModal} record={newEmployee} closeModal={this.handleOnClick} onOk={this.props.onSubmit}></EmployeeModal>
 			</Card>
 		);
 	}
