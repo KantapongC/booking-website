@@ -20,7 +20,7 @@ router.get('/test', (req, res) => {
 // @route   Post api/users/register
 // @desc    Register
 // @access  Public
-router.post('/register', async (req, res) => {
+router.post('/register', async (req, res, next) => {
 	const { username, password, password2 } = req.body;
 
 	try {
