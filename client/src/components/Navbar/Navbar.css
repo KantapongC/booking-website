@@ -1,0 +1,130 @@
+.menuBar {
+	padding: 0 100px;
+	/* border-bottom: solid 1px #e8e8e8; */
+	overflow: hidden;
+	/* box-shadow: 0 0 30px #b8b8b8; */
+	position: relative;
+	/* box-shadow: 0 0 30px #f3f1f1; */
+}
+.logo {
+	width: 150px;
+	float: left;
+	/* padding-left: 50px */
+}
+.logo a {
+	display: inline-block;
+	font-size: 20px;
+	/* padding: 19px 20px; */
+	text-transform: capitalize;
+}
+.logo img {
+	object-fit: cover;
+	width: 190px;
+	height: 80px;
+	margin-bottom: 8px;
+}
+.menuCon {
+	width: calc(100% - 150px);
+	float: left;
+}
+.menuCon .ant-menu-item {
+	padding: 10px 5px;
+	text-transform: uppercase;
+}
+.menuCon .ant-menu-submenu-title {
+	padding: 10px 20px;
+}
+.menuCon .ant-menu-item a,
+.menuCon .ant-menu-submenu-title a {
+	padding: 10px 15px;
+}
+.menuCon .ant-menu-horizontal {
+	border-bottom: none;
+	float: right;
+}
+.barsMenu {
+	float: right;
+	height: 32px;
+	padding: 6px;
+	margin-top: 25px;
+	display: none;
+	background: none;
+	border: none;
+}
+.barsBtn {
+	display: block;
+	width: 20px;
+	height: 2px;
+	background: #000000;
+	/* background: #8cb5db; */
+	position: relative;
+}
+.barsBtn:after,
+.barsBtn:before {
+	content: attr(x);
+	width: 20px;
+	position: absolute;
+	top: -6px;
+	left: 0;
+	height: 2px;
+	background: #000000;
+	/* background: #1890ff; */
+}
+.barsBtn:after {
+	top: auto;
+	bottom: -6px;
+}
+.ant-drawer-body {
+	padding: 0;
+}
+.ant-drawer-body .ant-menu-horizontal > .ant-menu-item,
+.ant-drawer-body .ant-menu-horizontal > .ant-menu-submenu {
+	display: inline-block;
+	width: 100%;
+}
+.ant-drawer-body .ant-menu-horizontal {
+	border-bottom: none;
+}
+.ant-drawer-body .ant-menu-horizontal > .ant-menu-item:hover {
+	border-bottom-color: transparent;
+}
+
+@media screen and (max-width: 1024px) {
+	.menuBar {
+		padding: 0px 50px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.menuBar {
+		padding: 0px 10px;
+	}
+
+	.menuCon .ant-menu-item {
+		padding: 10px 0px;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.menuBar {
+		padding: 0px 20px;
+	}
+	.barsMenu {
+		display: inline-block;
+	}
+	.menuCon .ant-menu-horizontal {
+		display: none;
+	}
+	.logo {
+		padding: 0%
+	}
+	.logo a,
+	img {
+		margin-left: -20px;
+		padding: 0px 20px;
+	}
+	.menuCon .ant-menu-item,
+	.menuCon .ant-menu-submenu-title {
+		padding: 1px 20px;
+	}
+}

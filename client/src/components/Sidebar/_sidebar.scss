@@ -1,0 +1,15 @@
+.sidebar-logo {
+	height: 80px;
+	margin: 16px;
+	overflow: hidden;
+
+	img {
+		display: block;
+		object-fit: cover;
+		width: 100%;
+	}
+	.sidebar-logo-img {
+		margin: -20% 15%;
+		width: 70%;
+	}
+}
