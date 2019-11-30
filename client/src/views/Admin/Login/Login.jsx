@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
 import FullScreenLoader from '../../../components/FullScreenLoader/FullScreenLoader';
 import logo from '../../../assets/img/logo_transparent_3.png';
-import { signIn } from '../../../store/actions/authActions';
+import { login } from '../../../store/actions/authActions';
+import { setAlert } from '../../../store/actions/alert';
 import { connect } from 'react-redux';
 
 class Login extends Component {
@@ -20,10 +21,10 @@ class Login extends Component {
 
 		const { form } = this.props;
 		const { validateFields, resetFields } = form;
-		validateFields((err, credential) => {
-			if (err) return;
+		validateFields((error, credential) => {
+			if (error) return;
 
-			this.props.signIn(credential);
+			this.props.login(credential);
 		});
 
 		resetFields();
@@ -37,7 +38,7 @@ class Login extends Component {
 		} = this;
 		const { getFieldDecorator } = form;
 
-		if (!auth.uid && isPressed) return <FullScreenLoader />;
+		// if (!auth.uid && isPressed) return <FullScreenLoader />;
 		return (
 			<Form onSubmit={handleSubmit} className='login-form'>
 				<Form.Item>
@@ -56,13 +57,7 @@ class Login extends Component {
 					<p>Password</p>
 					{getFieldDecorator('password', {
 						rules: [{ required: true, message: 'Please input your Password' }]
-					})(
-						<Input
-							prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
-							type='password'
-							placeholder='Password'
-						/>
-					)}
+					})(<Input prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />} type='password' placeholder='Password' />)}
 				</Form.Item>
 				<Form.Item className='form-item-login'>
 					<Button type='primary' htmlType='submit' className='login-form-button'>
@@ -78,17 +73,14 @@ const LoginForm = Form.create({ name: 'normal_login' })(Login);
 
 const mapStateToProps = state => {
 	return {
-		auth: state.firebase.auth
+		// auth: state.firebase.auth
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		signIn: credential => dispatch(signIn(credential))
+		// signIn: credential => dispatch(signIn(credential))
 	};
 };
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(LoginForm);
+export default connect(mapStateToProps, { login, setAlert })(LoginForm);

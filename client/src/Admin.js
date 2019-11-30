@@ -4,12 +4,14 @@ import AdminMain from './views/Admin/Main/Admin';
 import { connect } from 'react-redux';
 
 const Admin = ({ auth }) => {
-	return <>{auth.uid ? <AdminMain /> : <Login />}</>;
+	return <>{false ? <AdminMain /> : <Login />}</>;
+	// return <>{auth.uid ? <AdminMain /> : <Login />}</>;
 };
 
 const mapStateToProps = state => {
 	return {
-		auth: state.firebase.auth,
+		// auth: state.firebase.auth,
+		alert: state.alert,
 	};
 };
 

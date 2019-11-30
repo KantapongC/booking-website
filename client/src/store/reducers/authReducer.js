@@ -1,23 +1,42 @@
-import { LOGIN_SUCCESS, LOGIN_ERROR, SIGNOUT_SUCCESS } from '../actions/authActions';
+import { USER_LOADED, LOGIN_SUCCESS, LOGIN_ERROR, SIGNOUT_SUCCESS, AUTH_ERROR } from '../actions/types';
 
-const INITIAL_STATE = {
-	authError: null
+const initialState = {
+	token: localStorage.getItem('token'),
+	isAuthenticated: null,
+	loading: true,
+	user: null
 };
 
-const authReducer = (state = INITIAL_STATE, { type, payload }) => {
+const authReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
-		case LOGIN_ERROR:
+		case USER_LOADED:
 			return {
 				...state,
-				authError: 'Login failed'
+				isAuthenticated: true,
+				loading: false,
+				user: payload
 			};
+
 		case LOGIN_SUCCESS:
+			localStorage.setItem('token', payload.token);
 			return {
 				...state,
-				authError: null
+				...payload,
+				isAuthenticated: true,
+				loading: false
 			};
+
+		case LOGIN_ERROR:
 		case SIGNOUT_SUCCESS:
-			return state;
+			// case AUTH_ERROR:
+			localStorage.removeItem('token');
+			return {
+				...state,
+				token: null,
+				isAuthenticated: false,
+				loading: false
+			};
+
 		default:
 			return state;
 	}
