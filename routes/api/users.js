@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+const auth = require('../../middleware/auth');
+const config = require('config');
 
 // Load Input Validation
 const validateRegisterInput = require('../../validation/register');
@@ -47,7 +49,7 @@ router.post('/register', async (req, res, next) => {
 	}
 });
 
-// @route   Post api/users/register
+// @route   Post api/users/login
 // @desc    Login User / Returning JWT Token
 // @access  Public
 router.post('/login', async (req, res) => {
@@ -79,10 +81,10 @@ router.post('/login', async (req, res) => {
 		const payload = { id: user.id, username: user.username }; // Create JWT Payload
 
 		// Sign Token
-		jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+		jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {
 			res.json({
 				status: 'Success',
-				token: 'Bearer ' + token
+				token
 			});
 		});
 	} catch (error) {
@@ -93,11 +95,17 @@ router.post('/login', async (req, res) => {
 // @route   Get api/users/current
 // @desc    Return Current User
 // @access  Private
-router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
-	res.json({
-		id: req.user.id,
-		username: req.user.username
-	});
+router.get('/current', auth, async (req, res, next) => {
+	// res.json({
+	// 	id: req.user.id,
+	// 	username: req.user.username
+	// });
+	try {
+		const user = await User.findById(req.user.id).select('-password');
+		res.json(user);
+	} catch (error) {
+		next(error);
+	}
 });
 
 module.exports = router;
