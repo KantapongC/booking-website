@@ -7,18 +7,10 @@ const passport = require('passport');
 
 // Load Input Validation
 const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
 
 // Load User Model
 const User = require('../../models/User');
-
-// @route   GET api/users/test
-// @desc    Tests users route
-// @access  Public
-router.get('/test', (req, res) => {
-	res.json({
-		msg: 'Users Works'
-	});
-});
 
 // @route   Post api/users/register
 // @desc    Register
@@ -55,14 +47,56 @@ router.post('/register', async (req, res, next) => {
 	}
 });
 
+// @route   Post api/users/register
+// @desc    Login User / Returning JWT Token
+// @access  Public
+router.post('/login', async (req, res) => {
+	const { errors, isValid } = validateLoginInput(req.body);
+
+	//Check Validation Input
+	if (!isValid) return res.status(400).json({ status: 'Failed', message: { ...errors } });
+
+	const { username, password } = req.body;
+
+	try {
+		// Find user by email
+		const user = await User.findOne({ username });
+
+		if (!user) {
+			errors.username = 'User not found';
+			return res.status(404).json({ status: 'Failed', message: { ...errors } });
+		}
+
+		// Check password
+		const isMatch = await bcrypt.compare(password, user.password);
+
+		if (!isMatch) {
+			errors.password = 'Password incorrect';
+			return res.status(400).json({ status: 'Failed', message: { ...errors } });
+		}
+
+		// User Matched
+		const payload = { id: user.id, username: user.username }; // Create JWT Payload
+
+		// Sign Token
+		jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+			res.json({
+				status: 'Success',
+				token: 'Bearer ' + token
+			});
+		});
+	} catch (error) {
+		next(error);
+	}
+});
+
 // @route   Get api/users/current
 // @desc    Return Current User
 // @access  Private
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
 	res.json({
 		id: req.user.id,
-		name: req.user.name,
-		email: req.user.email
+		username: req.user.username
 	});
 });
 
