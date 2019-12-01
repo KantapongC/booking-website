@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
+// import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Button } from 'antd';
 import { serviceHeader } from '../../../variables/Variables';
 import MenuTable from '../../../components/Table/Table';
 import ServiceModal from '../../../components/Modal/ServiceModal';
-import { createService, updateService, deleteService } from '../../../store/actions/serviceActions';
+// import { createService, updateService, deleteService } from '../../../store/actions/serviceActions';
 
 const initialState = {
 	serviceName: '',
@@ -117,22 +117,24 @@ class Service extends Component {
 
 const mapStateToProps = state => {
 	return {
-		services: state.firestore.ordered.services
+		// services: state.firestore.ordered.services
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		createService: service => dispatch(createService(service)),
-		updateService: service => dispatch(updateService(service)),
-		deleteService: service => dispatch(deleteService(service))
+		// createService: service => dispatch(createService(service)),
+		// updateService: service => dispatch(updateService(service)),
+		// deleteService: service => dispatch(deleteService(service))
 	};
 };
 
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps
-	),
-	firestoreConnect([{ collection: 'services' }])
-)(Service);
+export default connect(mapStateToProps, mapDispatchToProps)(Service);
+
+// export default compose(
+// 	connect(
+// 		mapStateToProps,
+// 		mapDispatchToProps
+// 	),
+// 	firestoreConnect([{ collection: 'services' }])
+// )(Service);

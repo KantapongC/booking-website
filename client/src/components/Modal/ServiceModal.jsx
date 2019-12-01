@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
+// import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Form, Input, Modal, Select, InputNumber, Row, Col, Button } from 'antd';
 import { serviceItems } from '../../variables/Variables';
@@ -106,7 +106,8 @@ const mapStateToProps = state => {
 	};
 };
 
-export default compose(
-	connect(mapStateToProps),
-	firestoreConnect([{ collection: 'employees' }])
-)(ServiceModalForm);
+export default connect(mapStateToProps)(ServiceModalForm);
+// export default compose(
+// 	connect(mapStateToProps),
+// 	firestoreConnect([{ collection: 'employees' }])
+// )(ServiceModalForm);
