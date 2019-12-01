@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const keys = require('../../config/keys');
-const passport = require('passport');
 const auth = require('../../middleware/auth');
 const config = require('config');
 
@@ -96,10 +94,6 @@ router.post('/login', async (req, res) => {
 // @desc    Return Current User
 // @access  Private
 router.get('/current', auth, async (req, res, next) => {
-	// res.json({
-	// 	id: req.user.id,
-	// 	username: req.user.username
-	// });
 	try {
 		const user = await User.findById(req.user.id).select('-password');
 		res.json(user);
