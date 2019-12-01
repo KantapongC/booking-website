@@ -7,7 +7,7 @@
         "../views/User/Home/_home.scss",
         "../components/Sidebar/_sidebar.scss",
         "../views/Admin/Login/_login.scss",
-        "../views/Admin/Main/_admin.scss"
+        "_admin.scss"
     ],
     "names": [],
     "file": "index.css"
