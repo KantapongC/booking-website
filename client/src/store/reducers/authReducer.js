@@ -28,7 +28,7 @@ const authReducer = (state = initialState, { type, payload }) => {
 
 		case LOGIN_ERROR:
 		case SIGNOUT_SUCCESS:
-			// case AUTH_ERROR:
+		case AUTH_ERROR:
 			localStorage.removeItem('token');
 			return {
 				...state,
