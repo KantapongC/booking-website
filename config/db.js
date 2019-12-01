@@ -9,8 +9,8 @@ const connectDB = async () => {
 	const options = {
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
-		dbName: 'molsalon'
-		// useCreateIndex: true,
+		dbName: 'molsalon',
+		useCreateIndex: true,
 		// useFindAndModify: false,
 		// autoIndex: false, // Don't build indexes
 		// reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
