@@ -2,7 +2,7 @@
 @import '../views/User/Home/home';
 @import '../components/Sidebar/sidebar';
 @import '../views/Admin/Login/login';
-@import '../views/Admin/Main/admin';
+@import './admin';
 
 body {
 	margin: 0;

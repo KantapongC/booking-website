@@ -1,42 +1,56 @@
-export const LOGIN_SUCCESS = 'USER:LOGIN_SUCCESS';
-export const LOGIN_ERROR = 'USER:LOGIN_ERROR';
-export const SIGNOUT_SUCCESS = 'USER:SIGNOUT_SUCCESS';
-export const SIGNOUT_ERROR = 'USER:SIGNOUT_ERROR';
+import axios from 'axios';
+import { LOGIN_SUCCESS, LOGIN_ERROR, USER_LOADED, AUTH_ERROR } from './types';
+import { setAlert } from './alert';
+import setAuthToken from '../utils/setAuthToken';
+// Load User
+export const loadUser = () => async dispatch => {
+	if (localStorage.token) {
+		setAuthToken(localStorage.token);
+	}
 
-export const signIn = credentials => {
-	return async (dispatch, getState, { getFirebase }) => {
-		const firebase = getFirebase();
+	try {
+		const res = await axios.get('/api/users/current');
 
-		try {
-			let email = credentials.username;
-			if (credentials.username.indexOf('@') === -1) email += '@molsalon.com';
-
-			await firebase
-				.auth()
-				.setPersistence(firebase.auth.Auth.Persistence.SESSION)
-				.then(() => {
-					return firebase.auth().signInWithEmailAndPassword(email, credentials.password);
-				});
-
-			dispatch({ type: LOGIN_SUCCESS });
-		} catch (error) {
-			dispatch({ type: LOGIN_ERROR, error });
-		}
-	};
+		dispatch({
+			type: USER_LOADED,
+			payload: res.data
+		});
+	} catch (err) {
+		dispatch({
+			type: AUTH_ERROR
+		});
+	}
 };
 
-export const signOut = () => {
-	return async (dispatch, getState, { getFirebase }) => {
-		const firebase = getFirebase();
-
-		try {
-			await firebase.auth().signOut();
-			sessionStorage.removeItem('token');
-			sessionStorage.removeItem('loginAt');
-
-			dispatch({ type: SIGNOUT_SUCCESS });
-		} catch (error) {
-			dispatch({ type: SIGNOUT_ERROR, error });
+// Login User
+export const login = ({ username, password }) => async dispatch => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json'
 		}
 	};
+
+	// const body = { username, password };
+	const body = JSON.stringify({ username, password });
+
+	try {
+		const res = await axios.post('/api/users/login', body, config);
+
+		dispatch({
+			type: LOGIN_SUCCESS,
+			payload: res.data
+		});
+
+		dispatch(loadUser());
+	} catch (err) {
+		const errors = err.response.data.errors;
+
+		if (errors) {
+			errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+		}
+
+		dispatch({
+			type: LOGIN_ERROR
+		});
+	}
 };
