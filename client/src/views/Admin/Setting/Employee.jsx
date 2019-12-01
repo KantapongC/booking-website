@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import UserCard from '../../../components/Card/Card';
 import NewUserCard from '../../../components/Card/NewCard';
 import { Row, Col } from 'antd';
-import { createEmployee } from '../../../store/actions/employeeActions';
-import { firestoreConnect } from 'react-redux-firebase';
+// import { createEmployee } from '../../../store/actions/employeeActions';
+// import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
 class EmployeeSetting extends Component {
@@ -30,20 +30,22 @@ class EmployeeSetting extends Component {
 
 const mapStateToProps = state => {
 	return {
-		employees: state.firestore.ordered.employees
+		// employees: state.firestore.ordered.employees
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		createEmployee: employee => dispatch(createEmployee(employee))
+		// createEmployee: employee => dispatch(createEmployee(employee))
 	};
 };
 
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps
-	),
-	firestoreConnect([{ collection: 'employees' }])
-)(EmployeeSetting);
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeSetting);
+
+// export default compose(
+// 	connect(
+// 		mapStateToProps,
+// 		mapDispatchToProps
+// 	),
+// 	firestoreConnect([{ collection: 'employees' }])
+// )(EmployeeSetting);

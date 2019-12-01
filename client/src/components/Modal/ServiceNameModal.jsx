@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
+// import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Form, Input, Modal, Select, InputNumber, Row, Col, Button } from 'antd';
 import { serviceItems } from '../../variables/Variables';
@@ -103,11 +103,12 @@ const ServiceNameModalForm = Form.create()(ServiceNameModal);
 
 const mapStateToProps = state => {
 	return {
-		serviceName: state.firestore.ordered.serviceName
+		// serviceName: state.firestore.ordered.serviceName
 	};
 };
 
-export default compose(
-	connect(mapStateToProps),
-	firestoreConnect([{ collection: 'serviceName' }])
-)(ServiceNameModalForm);
+export default connect(mapStateToProps)(ServiceNameModalForm);
+// export default compose(
+// 	connect(mapStateToProps),
+// 	firestoreConnect([{ collection: 'serviceName' }])
+// )(ServiceNameModalForm);

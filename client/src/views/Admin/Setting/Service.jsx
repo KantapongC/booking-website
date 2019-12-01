@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import ServiceNameCard from '../../../components/Card/ServiceNameCard';
 import ServiceNameModal from '../../../components/Modal/ServiceNameModal';
 import { Row, Col, Button } from 'antd';
-import { createServiceName } from '../../../store/actions/serviceNameActions';
-import { firestoreConnect } from 'react-redux-firebase';
+// import { createServiceName } from '../../../store/actions/serviceNameActions';
+// import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
 const newServiceName = {
@@ -66,21 +66,22 @@ class ServiceSetting extends PureComponent {
 
 const mapStateToProps = state => {
 	return {
-		serviceName: state.sampleFirestore.ordered.serviceName
-		// state.firestore.ordered.serviceName
+		// serviceName: state.sampleFirestore.ordered.serviceName
+		// // state.firestore.ordered.serviceName
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		createServiceName: serviceName => dispatch(createServiceName(serviceName))
+		// createServiceName: serviceName => dispatch(createServiceName(serviceName))
 	};
 };
 
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps
-	),
-	firestoreConnect([{ collection: 'serviceName' }])
-)(ServiceSetting);
+export default connect(mapStateToProps, mapDispatchToProps)(ServiceSetting);
+// export default compose(
+// 	connect(
+// 		mapStateToProps,
+// 		mapDispatchToProps
+// 	),
+// 	firestoreConnect([{ collection: 'serviceName' }])
+// )(ServiceSetting);
