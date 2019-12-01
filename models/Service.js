@@ -3,15 +3,21 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const ServiceSchema = new Schema({
-	username: {
-		type: String,
-		required: true
-	},
-	password: {
-		type: String,
-		required: true
-	},
-	date: {
+	serviceName: { type: String, required: true, unique: true },
+	price: { type: Number },
+	customer: { type: String },
+	blowDry: { type: String },
+	coat: { type: String },
+	cut: { type: String },
+	hairSpa: { type: String },
+	massage: { type: String },
+	nail: { type: String },
+	product: { type: String },
+	steam: { type: String },
+	thin: { type: String },
+	tint: { type: String },
+	wash: { type: String },
+	createdAt: {
 		type: Date,
 		default: Date.now
 	}
