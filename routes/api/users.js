@@ -55,40 +55,51 @@ router.post(
 // @route   Post api/users/login
 // @desc    Login User / Returning JWT Token
 // @access  Public
-router.post('/login', [check('username', 'Username is required').not().isEmpty(), check('password', 'Password is required').not().isEmpty()], async (req, res) => {
-	const errors = validationResult(req);
+router.post(
+	'/login',
+	[
+		check('username', 'Username is required')
+			.not()
+			.isEmpty(),
+		check('password', 'Password is required')
+			.not()
+			.isEmpty()
+	],
+	async (req, res, next) => {
+		const errors = validationResult(req);
 
-	if (!errors.isEmpty()) return res.status(400).json({ status: 'Failed', errors: errors.array() });
+		if (!errors.isEmpty()) return res.status(400).json({ status: 'Failed', errors: errors.array() });
 
-	const { username, password } = req.body;
+		const { username, password } = req.body;
 
-	try {
-		// Find user by email
-		const user = await User.findOne({ username });
+		try {
+			// Find user by email
+			const user = await User.findOne({ username });
 
-		if (!user) return res.status(404).json({ status: 'Failed', message: [{ msg: 'User not found' }] });
+			if (!user) return res.status(404).json({ status: 'Failed', message: [{ msg: 'User not found' }] });
 
-		// Check password
-		const isMatch = await bcrypt.compare(password, user.password);
+			// Check password
+			const isMatch = await bcrypt.compare(password, user.password);
 
-		if (!isMatch) return res.status(400).json({ status: 'Failed', message: [{ msg: 'Password incorrect' }] });
+			if (!isMatch) return res.status(400).json({ status: 'Failed', message: [{ msg: 'Password incorrect' }] });
 
-		// User Matched
-		const payload = { id: user.id, username: user.username }; // Create JWT Payload
+			// User Matched
+			const payload = { id: user.id, username: user.username }; // Create JWT Payload
 
-		// Sign Token
-		jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (error, token) => {
-			if (error) throw error;
+			// Sign Token
+			jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (error, token) => {
+				if (error) throw error;
 
-			res.json({
-				status: 'Success',
-				token
+				res.json({
+					status: 'Success',
+					token
+				});
 			});
-		});
-	} catch (error) {
-		next(error);
+		} catch (error) {
+			next(error);
+		}
 	}
-});
+);
 
 // @route   Get api/users/current
 // @desc    Return Current User
