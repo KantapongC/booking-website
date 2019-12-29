@@ -5,6 +5,7 @@ import { serviceHeader } from '../../../variables/Variables';
 import MenuTable from '../../../components/Table/Table';
 import ServiceModal from '../../../components/Modal/ServiceModal';
 import { createService, getService, updateService, deleteService } from '../../../store/actions/serviceActions';
+import { getEmployee } from '../../../store/actions/employeeActions';
 
 const initialState = {
 	serviceName: '',
@@ -21,6 +22,11 @@ const initialState = {
 	thin: '',
 	tint: '',
 	wash: ''
+};
+
+const options = {
+	startDate: new Date(new Date().setHours(0, 0, 0, 0)).toISOString(),
+	endDate: new Date(new Date(new Date().setHours(23, 59, 59, 999))).toISOString()
 };
 
 class Service extends Component {
@@ -60,6 +66,7 @@ class Service extends Component {
 		const { createService } = this.props;
 
 		createService(newData);
+		getService(options);
 
 		this.setState({
 			visible: false,
@@ -83,14 +90,11 @@ class Service extends Component {
 	};
 
 	async componentDidMount() {
-		const { getService } = this.props;
-
-		const options = {
-			startDate: new Date(new Date().setHours(0, 0, 0, 0)).toISOString(),
-			endDate: new Date(new Date(new Date().setHours(23, 59, 59, 999))).toISOString()
-		};
+		const { getService, employee, getEmployee } = this.props;
 
 		getService(options);
+
+		if (!employee.employees) getEmployee();
 	}
 
 	render() {
@@ -119,8 +123,9 @@ class Service extends Component {
 
 const mapStateToProps = state => {
 	return {
-		service: state.service
+		service: state.service,
+		employee: state.employee
 	};
 };
 
-export default connect(mapStateToProps, { getService })(Service);
+export default connect(mapStateToProps, { createService, getService, getEmployee })(Service);

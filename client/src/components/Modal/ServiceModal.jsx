@@ -39,7 +39,7 @@ class ServiceModal extends PureComponent {
 	};
 
 	render() {
-		const { record, form, onCancel, visible, isUpdate, onDelete, employees } = this.props;
+		const { record, form, onCancel, visible, isUpdate, onDelete, employee } = this.props;
 		const { getFieldDecorator } = form;
 
 		return (
@@ -78,7 +78,7 @@ class ServiceModal extends PureComponent {
 											]
 										})(
 											item.hasOptions ? (
-												<Select>{employees && employees.map(employee => <Option value={employee.username}>{employee.username}</Option>)}</Select>
+												<Select>{employee.employees && employee.employees.docs.map(employee => <Option value={employee.username}>{employee.username}</Option>)}</Select>
 											) : item.type === 'number' ? (
 												<InputNumber defaultValue={0} formatter={value => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={value => value.replace(/฿\s?|(,*)/g, '')} />
 											) : (
@@ -100,7 +100,7 @@ const ServiceModalForm = Form.create()(ServiceModal);
 
 const mapStateToProps = state => {
 	return {
-		employees: state.employees
+		employee: state.employee
 	};
 };
 
