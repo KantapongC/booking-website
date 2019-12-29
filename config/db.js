@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 const config = require('config');
 
-const connectDB = async () => {
-	// DB Configuration
-	const db = config.get('localMongoURI');
+// DB Configuration
+const db = config.get('localMongoURI');
 
+const connectDB = async () => {
 	// Connect to MongoDB Options
 	const options = {
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
 		dbName: 'molsalon',
 		useCreateIndex: true,
-		// useFindAndModify: false,
+		useFindAndModify: false
 		// autoIndex: false, // Don't build indexes
 		// reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
 		// reconnectInterval: 500, // Reconnect every 500ms
