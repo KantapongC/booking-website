@@ -1,4 +1,5 @@
 import {
+	CREATE_SERVICE_LOADING,
 	CREATE_SERVICE_SUCCESS,
 	CREATE_SERVICE_ERROR,
 	GET_SERVICE_SUCCESS,
@@ -10,27 +11,60 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-	error: null
+	error: null,
+	isCreating: false
 };
 
 const serviceReducer = (state = INITIAL_STATE, { type, payload, error }) => {
 	switch (type) {
+		case CREATE_SERVICE_LOADING:
+			return {
+				...state,
+				isCreating: true
+			};
+
 		case CREATE_SERVICE_SUCCESS:
-			return state;
+			return {
+				...state,
+				isCreating: false
+			};
+
 		case CREATE_SERVICE_ERROR:
-			return { ...state, error };
+			return {
+				...state,
+				error
+			};
+
 		case GET_SERVICE_SUCCESS:
-			return { ...state, services: payload };
+			return {
+				...state,
+				services: payload
+			};
+
 		case GET_SERVICE_ERROR:
-			return { ...state, error };
+			return {
+				...state,
+				error
+			};
+
 		case UPDATE_SERVICE_SUCCESS:
 			return state;
+
 		case UPDATE_SERVICE_ERROR:
-			return { ...state, error };
+			return {
+				...state,
+				error
+			};
+
 		case DELETE_SERVICE_SUCCESS:
 			return state;
+
 		case DELETE_SERVICE_ERROR:
-			return { ...state, error };
+			return {
+				...state,
+				error
+			};
+
 		default:
 			return state;
 	}

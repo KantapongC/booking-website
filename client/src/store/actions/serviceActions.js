@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { setAlert } from '../actions/alert';
 import {
+	CREATE_SERVICE_LOADING,
 	CREATE_SERVICE_SUCCESS,
 	CREATE_SERVICE_ERROR,
 	GET_SERVICE_SUCCESS,
@@ -13,6 +14,8 @@ import {
 
 export const createService = newService => async dispatch => {
 	try {
+		dispatch({ type: CREATE_SERVICE_LOADING });
+
 		const res = await axios.post('/api/services/create', newService);
 
 		dispatch({ type: CREATE_SERVICE_SUCCESS, payload: res.data });

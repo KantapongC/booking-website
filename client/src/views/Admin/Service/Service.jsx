@@ -62,11 +62,10 @@ class Service extends Component {
 		});
 	};
 
-	handleAdd = newData => {
+	handleAdd = async newData => {
 		const { createService } = this.props;
 
 		createService(newData);
-		getService(options);
 
 		this.setState({
 			visible: false,
@@ -95,6 +94,12 @@ class Service extends Component {
 		getService(options);
 
 		if (!employee.employees) getEmployee();
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.service.isCreating !== this.props.service.isCreating) {
+			this.props.getService(options);
+		}
 	}
 
 	render() {
