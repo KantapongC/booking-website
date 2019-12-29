@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setAlert } from '../actions/alert';
 import {
 	CREATE_SERVICE_SUCCESS,
 	CREATE_SERVICE_ERROR,
@@ -17,6 +18,7 @@ export const createService = newService => async dispatch => {
 		dispatch({ type: CREATE_SERVICE_SUCCESS, payload: res.data });
 	} catch (error) {
 		dispatch({ type: CREATE_SERVICE_ERROR, error });
+		dispatch(setAlert('การเพิ่มรายการไม่สำเร็จ', 'danger'));
 	}
 };
 
