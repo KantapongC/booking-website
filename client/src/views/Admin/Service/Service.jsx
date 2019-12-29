@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
 import { Button } from 'antd';
 import { serviceHeader } from '../../../variables/Variables';
 import MenuTable from '../../../components/Table/Table';
@@ -85,21 +83,18 @@ class Service extends Component {
 	};
 
 	async componentDidMount() {
-		try {
-			const options = {
-				startDate: new Date(new Date().setHours(0, 0, 0, 0)).toISOString(),
-				endDate: new Date(new Date(new Date().setHours(23, 59, 59, 999))).toISOString()
-			};
+		const { getService } = this.props;
 
-			this.props.getService(options);
-		} catch (error) {
-			alert(error);
-		}
+		const options = {
+			startDate: new Date(new Date().setHours(0, 0, 0, 0)).toISOString(),
+			endDate: new Date(new Date(new Date().setHours(23, 59, 59, 999))).toISOString()
+		};
+
+		getService(options);
 	}
 
 	render() {
 		const { service } = this.props;
-		// const data = Array.isArray(service.services) && service.services.length > 0 ? service.services.docs : null;
 		const data = service.services ? service.services.docs : null;
 
 		return (
@@ -107,7 +102,7 @@ class Service extends Component {
 				<Button onClick={this.handleOnClick} icon='plus' style={{ marginBottom: 16 }} shape='round' size='large'>
 					เพิ่มรายการใหม่
 				</Button>
-				{/* <ServiceModal
+				<ServiceModal
 					visible={this.state.visible}
 					onCancel={this.handleOnCancel}
 					onOk={this.handleAdd}
@@ -115,7 +110,7 @@ class Service extends Component {
 					isUpdate={this.state.isUpdate}
 					handleUpdate={this.handleUpdate}
 					onDelete={this.handleDelete}
-				/> */}
+				/>
 				<MenuTable title='รายการวันนี้' tableHeader={serviceHeader} tableData={data} handleDelete={this.handleDelete} onRowClick={this.onRowClick} />
 			</>
 		);

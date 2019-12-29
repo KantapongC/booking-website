@@ -10,19 +10,19 @@ import {
 	DELETE_SERVICE_ERROR
 } from './types';
 
-export const createService = newService => {
-	return async (dispatch, getState) => {
-		try {
-			dispatch({ type: CREATE_SERVICE_SUCCESS, newService });
-		} catch (error) {
-			dispatch({ type: CREATE_SERVICE_ERROR, error });
-		}
-	};
+export const createService = newService => async dispatch => {
+	try {
+		const res = await axios.post('/api/services/create', newService);
+
+		dispatch({ type: CREATE_SERVICE_SUCCESS, payload: res.data });
+	} catch (error) {
+		dispatch({ type: CREATE_SERVICE_ERROR, error });
+	}
 };
 
 export const getService = options => async dispatch => {
 	try {
-		const {startDate, endDate} =options;
+		const { startDate, endDate } = options;
 
 		const res = await axios.get(`/api/services?startDate=${startDate}&endDate=${endDate}`);
 
