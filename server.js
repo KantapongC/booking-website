@@ -1,6 +1,5 @@
 const express = require('express');
 const connectDB = require('./config/db');
-
 const cors = require('cors');
 
 // Initialise Express App
@@ -17,6 +16,7 @@ app.use(express.json({ extended: false }));
 
 // Use Routes
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/services', require('./routes/api/services'));
 
 const port = process.env.PORT || 5000;
 
