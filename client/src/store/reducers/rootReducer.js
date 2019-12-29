@@ -9,10 +9,10 @@ import alert from './alert';
 
 const rootReducer = combineReducers({
 	auth: authReducer,
+	service: serviceReducer,
 	// firestore: firestoreReducer,
 	// firebase: firebaseReducer,
 	// employee: employeeReducer,
-	// service: serviceReducer,
 	// sampleFirestore,
 	alert
 });

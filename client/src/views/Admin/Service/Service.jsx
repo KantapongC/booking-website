@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import { serviceHeader } from '../../../variables/Variables';
 import MenuTable from '../../../components/Table/Table';
 import ServiceModal from '../../../components/Modal/ServiceModal';
-// import { createService, updateService, deleteService } from '../../../store/actions/serviceActions';
+import { createService, getService, updateService, deleteService } from '../../../store/actions/serviceActions';
 
 const initialState = {
 	serviceName: '',
@@ -84,23 +84,30 @@ class Service extends Component {
 		this.setState({ visible: true, isUpdate: true, selectedRecord: record });
 	};
 
+	async componentDidMount() {
+		try {
+			const options = {
+				startDate: new Date(new Date().setHours(0, 0, 0, 0)).toISOString(),
+				endDate: new Date(new Date(new Date().setHours(23, 59, 59, 999))).toISOString()
+			};
+
+			this.props.getService(options);
+		} catch (error) {
+			alert(error);
+		}
+	}
+
 	render() {
-		const { services } = this.props;
-		const data = services
-			? services.map(service => {
-					return {
-						...service,
-						key: service.id
-					};
-			  })
-			: null;
+		const { service } = this.props;
+		// const data = Array.isArray(service.services) && service.services.length > 0 ? service.services.docs : null;
+		const data = service.services ? service.services.docs : null;
 
 		return (
 			<>
 				<Button onClick={this.handleOnClick} icon='plus' style={{ marginBottom: 16 }} shape='round' size='large'>
 					เพิ่มรายการใหม่
 				</Button>
-				<ServiceModal
+				{/* <ServiceModal
 					visible={this.state.visible}
 					onCancel={this.handleOnCancel}
 					onOk={this.handleAdd}
@@ -108,7 +115,7 @@ class Service extends Component {
 					isUpdate={this.state.isUpdate}
 					handleUpdate={this.handleUpdate}
 					onDelete={this.handleDelete}
-				/>
+				/> */}
 				<MenuTable title='รายการวันนี้' tableHeader={serviceHeader} tableData={data} handleDelete={this.handleDelete} onRowClick={this.onRowClick} />
 			</>
 		);
@@ -117,24 +124,8 @@ class Service extends Component {
 
 const mapStateToProps = state => {
 	return {
-		// services: state.firestore.ordered.services
+		service: state.service
 	};
 };
 
-const mapDispatchToProps = dispatch => {
-	return {
-		// createService: service => dispatch(createService(service)),
-		// updateService: service => dispatch(updateService(service)),
-		// deleteService: service => dispatch(deleteService(service))
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Service);
-
-// export default compose(
-// 	connect(
-// 		mapStateToProps,
-// 		mapDispatchToProps
-// 	),
-// 	firestoreConnect([{ collection: 'services' }])
-// )(Service);
+export default connect(mapStateToProps, { getService })(Service);

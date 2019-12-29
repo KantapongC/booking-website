@@ -1,27 +1,35 @@
-export const CREATE_SERVICE_SUCCESS = 'SERVICE:CREATE_SUCCESS';
-export const CREATE_SERVICE_ERROR = 'SERVICE:CREATE_ERROR';
-export const UPDATE_SERVICE_SUCCESS = 'SERVICE:UPDATE_SUCCESS';
-export const UPDATE_SERVICE_ERROR = 'SERVICE:UPDATE_ERROR';
-export const DELETE_SERVICE_SUCCESS = 'SERVICE:DELETE_SUCCESS';
-export const DELETE_SERVICE_ERROR = 'SERVICE:DELETE_ERROR';
+import axios from 'axios';
+import {
+	CREATE_SERVICE_SUCCESS,
+	CREATE_SERVICE_ERROR,
+	GET_SERVICE_SUCCESS,
+	GET_SERVICE_ERROR,
+	UPDATE_SERVICE_SUCCESS,
+	UPDATE_SERVICE_ERROR,
+	DELETE_SERVICE_SUCCESS,
+	DELETE_SERVICE_ERROR
+} from './types';
 
 export const createService = newService => {
-	return async (dispatch, getState, { getFirestore }) => {
-		const firestore = getFirestore();
-		const profile = getState().firebase.profile;
-		const authorId = getState().firebase.auth.uid;
-
+	return async (dispatch, getState) => {
 		try {
-			await firestore.collection('services').add({
-				...newService,
-				createdAt: new Date()
-			});
-
 			dispatch({ type: CREATE_SERVICE_SUCCESS, newService });
 		} catch (error) {
 			dispatch({ type: CREATE_SERVICE_ERROR, error });
 		}
 	};
+};
+
+export const getService = options => async dispatch => {
+	try {
+		const {startDate, endDate} =options;
+
+		const res = await axios.get(`/api/services?startDate=${startDate}&endDate=${endDate}`);
+
+		dispatch({ type: GET_SERVICE_SUCCESS, payload: res.data });
+	} catch (error) {
+		dispatch({ type: GET_SERVICE_ERROR, error });
+	}
 };
 
 export const updateService = service => {
