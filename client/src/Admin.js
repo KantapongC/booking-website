@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Alert from './components/Alert/Alert';
 import PrivateRoute from './components/Routing/PrivateRoute';
 import Login from './views/Admin/Login/Login';
 import Sidebar from './components/Sidebar/Sidebar';
@@ -34,26 +35,29 @@ class Admin extends Component {
 
 	render() {
 		return (
-			<Switch>
-				<Route exact path='/admin/login' component={Login} />
-				<Layout className='admin-layout' hasSider>
-					<Sidebar collapsed={this.state.collapsed} onCollapse={this.onCollapse} />
-					<Layout className='admin-layout'>
-						<Layout.Header className='admin-layout-header' />
-						<Layout.Content className='admin-layout-content'>
-							<div className='content-card'>
-								<PrivateRoute exact path='/admin/dashboard' component={Dashboard} />
-								<PrivateRoute exact path='/admin/service' component={Service} />
-								<PrivateRoute exact path='/admin/employee' component={Employee} />
-								<PrivateRoute exact path='/admin/setting/service' component={ServiceSetting} />
-								<PrivateRoute exact path='/admin/setting/employee' component={EmployeeSetting} />
-								<Redirect from='/admin' to='/admin/dashboard' />
-							</div>
-						</Layout.Content>
-						<Footer />
+			<>
+				<Alert />
+				<Switch>
+					<Route exact path='/admin/login' component={Login} />
+					<Layout className='admin-layout' hasSider>
+						<Sidebar collapsed={this.state.collapsed} onCollapse={this.onCollapse} />
+						<Layout className='admin-layout'>
+							<Layout.Header className='admin-layout-header' />
+							<Layout.Content className='admin-layout-content'>
+								<div className='content-card'>
+									<PrivateRoute exact path='/admin/dashboard' component={Dashboard} />
+									<PrivateRoute exact path='/admin/service' component={Service} />
+									<PrivateRoute exact path='/admin/employee' component={Employee} />
+									<PrivateRoute exact path='/admin/setting/service' component={ServiceSetting} />
+									<PrivateRoute exact path='/admin/setting/employee' component={EmployeeSetting} />
+									<Redirect from='/admin' to='/admin/dashboard' />
+								</div>
+							</Layout.Content>
+							<Footer />
+						</Layout>
 					</Layout>
-				</Layout>
-			</Switch>
+				</Switch>
+			</>
 		);
 	}
 }
