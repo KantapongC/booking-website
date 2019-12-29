@@ -1,20 +1,19 @@
-export const CREATE_EMPLOYEE_SUCCESS = 'EMPLOYEE:CREATE_SUCCESS';
-export const CREATE_EMPLOYEE_ERROR = 'EMPLOYEE:CREATE_ERROR';
+import axios from 'axios';
+import { CREATE_EMPLOYEE_SUCCESS, CREATE_EMPLOYEE_ERROR, GET_EMPLOYEE_SUCCESS, GET_EMPLOYEE_ERROR } from './types';
 
-export const createEmployee = employee => {
-	return async (dispatch, getState, { getFirestore }) => {
-		const firestore = getFirestore();
-		const profile = getState().firebase.profile;
-		const authorId = getState().firebase.auth.uid;
-		try {
-			await firestore.collection('employees').add({
-				...employee,
-				createdAt: new Date()
-			});
+export const createEmployee = employee => async dispatch => {
+	try {
+		dispatch({ type: CREATE_EMPLOYEE_SUCCESS, employee });
+	} catch (error) {
+		dispatch({ type: CREATE_EMPLOYEE_ERROR, error });
+	}
+};
 
-			dispatch({ type: CREATE_EMPLOYEE_SUCCESS, employee });
-		} catch (error) {
-			dispatch({ type: CREATE_EMPLOYEE_ERROR, error });
-		}
-	};
+export const getEmployee = () => async dispatch => {
+	try {
+		const res = await axios.get('/api/employees/');
+		dispatch({ type: GET_EMPLOYEE_SUCCESS, payload: res.data });
+	} catch (error) {
+		dispatch({ type: GET_EMPLOYEE_ERROR, error });
+	}
 };
