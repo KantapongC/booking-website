@@ -4,8 +4,8 @@ const aggregatePaginate = require('mongoose-aggregate-paginate-v2');
 
 // Create Schema
 const ServiceSchema = new Schema({
-	serviceName: { type: String, required: true, unique: true },
-	price: { type: Number },
+	serviceName: { type: String, required: true },
+	price: { type: Number, required: true },
 	customer: { type: String },
 	blowDry: { type: String },
 	coat: { type: String },
