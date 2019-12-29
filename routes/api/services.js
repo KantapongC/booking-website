@@ -59,4 +59,34 @@ router.get('/', authenticate, async (req, res, next) => {
 	}
 });
 
+// @route   UPDATE api/services/:id
+// @desc    Update a service
+// @access  Private
+router.put('/:id', authenticate, async (req, res, next) => {
+	const { id } = req.params;
+
+	try {
+		const result = await Service.updateOne({ _id: id }, req.body);
+
+		return res.json({ status: 'Success', ...result });
+	} catch (error) {
+		next(error);
+	}
+});
+
+// @route   DELETE api/services/:id
+// @desc    Delete a service
+// @access  Private
+router.delete('/:id', authenticate, async (req, res, next) => {
+	const { id } = req.params;
+
+	try {
+		const result = await Service.deleteOne({ _id: id });
+
+		return res.json({ status: 'Success', ...result });
+	} catch (error) {
+		next(error);
+	}
+});
+
 module.exports = router;
