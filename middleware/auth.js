@@ -1,10 +1,19 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const keys = require('../config/keys');
 
-module.exports = async function(req, res, next) {
+const getTokenFromHeader = req => {
+	const xauthToken = req.header('x-auth-token');
+	if (xauthToken) return xauthToken;
+
+	const bearerToken = req.header('Authorization');
+	if (bearerToken.split(' ')[0] === 'Bearer') return bearerToken.split(' ')[1];
+
+	return false;
+};
+
+module.exports = async (req, res, next) => {
 	// Get token from header
-	const token = req.header('x-auth-token');
+	const token = getTokenFromHeader(req);
 
 	// Check if not token
 	if (!token) {
