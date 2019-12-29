@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const aggregatePaginate = require('mongoose-aggregate-paginate-v2');
 
 // Create Schema
 const ServiceSchema = new Schema({
@@ -22,5 +23,7 @@ const ServiceSchema = new Schema({
 		default: Date.now
 	}
 });
+
+ServiceSchema.plugin(aggregatePaginate);
 
 module.exports = service = mongoose.model('services', ServiceSchema);
