@@ -4,15 +4,17 @@ import {
 	CREATE_SERVICE_ERROR,
 	GET_SERVICE_SUCCESS,
 	GET_SERVICE_ERROR,
+	UPDATE_SERVICE_LOADING,
 	UPDATE_SERVICE_SUCCESS,
 	UPDATE_SERVICE_ERROR,
+	DELETE_SERVICE_LOADING,
 	DELETE_SERVICE_SUCCESS,
 	DELETE_SERVICE_ERROR
 } from '../actions/types';
 
 const INITIAL_STATE = {
 	error: null,
-	isCreating: false
+	isLoading: false
 };
 
 const serviceReducer = (state = INITIAL_STATE, { type, payload, error }) => {
@@ -20,13 +22,13 @@ const serviceReducer = (state = INITIAL_STATE, { type, payload, error }) => {
 		case CREATE_SERVICE_LOADING:
 			return {
 				...state,
-				isCreating: true
+				isLoading: !state.isLoading
 			};
 
 		case CREATE_SERVICE_SUCCESS:
 			return {
 				...state,
-				isCreating: false
+				isLoading: !state.isLoading
 			};
 
 		case CREATE_SERVICE_ERROR:
@@ -47,6 +49,12 @@ const serviceReducer = (state = INITIAL_STATE, { type, payload, error }) => {
 				error
 			};
 
+		case UPDATE_SERVICE_LOADING:
+			return {
+				...state,
+				isLoading: !state.isLoading
+			};
+
 		case UPDATE_SERVICE_SUCCESS:
 			return state;
 
@@ -54,6 +62,12 @@ const serviceReducer = (state = INITIAL_STATE, { type, payload, error }) => {
 			return {
 				...state,
 				error
+			};
+
+		case DELETE_SERVICE_LOADING:
+			return {
+				...state,
+				isLoading: !state.isLoading
 			};
 
 		case DELETE_SERVICE_SUCCESS:
