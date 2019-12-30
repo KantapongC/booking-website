@@ -45,12 +45,12 @@ class Admin extends Component {
 							<Layout.Header className='admin-layout-header' />
 							<Layout.Content className='admin-layout-content'>
 								<div className='content-card'>
-									<PrivateRoute exact path='/admin/dashboard' component={Dashboard} />
+									<PrivateRoute exact path='/admin' component={Dashboard} />
 									<PrivateRoute exact path='/admin/service' component={Service} />
 									<PrivateRoute exact path='/admin/employee' component={Employee} />
 									<PrivateRoute exact path='/admin/setting/service' component={ServiceSetting} />
 									<PrivateRoute exact path='/admin/setting/employee' component={EmployeeSetting} />
-									<Redirect from='/admin' to='/admin/dashboard' />
+									{/* <Redirect from='/admin' to='/admin/dashboard' /> */}
 								</div>
 							</Layout.Content>
 							<Footer />
