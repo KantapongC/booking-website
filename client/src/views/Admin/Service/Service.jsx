@@ -88,7 +88,7 @@ class Service extends Component {
 		this.setState({ visible: true, isUpdate: true, selectedRecord: record });
 	};
 
-	async componentDidMount() {
+	componentDidMount() {
 		const { getService, employee, getEmployee } = this.props;
 
 		getService(options);
@@ -97,7 +97,7 @@ class Service extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.service.isCreating !== this.props.service.isCreating) {
+		if (prevProps.service.isLoading !== this.props.service.isLoading) {
 			this.props.getService(options);
 		}
 	}
@@ -133,4 +133,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { createService, getService, getEmployee })(Service);
+export default connect(mapStateToProps, { createService, getService, updateService, deleteService, getEmployee })(Service);

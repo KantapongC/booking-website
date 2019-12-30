@@ -8,6 +8,8 @@ const Alert = ({ alerts }) => {
 			switch (alert.alertType) {
 				case 'info':
 					return message.info(alert.msg);
+				case 'success':
+					return message.success(alert.msg);
 				case 'warning':
 					return message.warning(alert.msg);
 				default:
