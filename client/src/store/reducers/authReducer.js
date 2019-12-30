@@ -3,7 +3,7 @@ import { USER_LOADED, LOGIN_SUCCESS, LOGIN_ERROR, SIGNOUT_SUCCESS, AUTH_ERROR } 
 const initialState = {
 	token: localStorage.getItem('token'),
 	isAuthenticated: null,
-	loading: true,
+	isLoading: true,
 	user: null
 };
 
@@ -13,7 +13,7 @@ const authReducer = (state = initialState, { type, payload }) => {
 			return {
 				...state,
 				isAuthenticated: true,
-				loading: false,
+				isLoading: false,
 				user: payload
 			};
 
@@ -23,7 +23,7 @@ const authReducer = (state = initialState, { type, payload }) => {
 				...state,
 				...payload,
 				isAuthenticated: true,
-				loading: false
+				isLoading: false
 			};
 
 		case LOGIN_ERROR:
@@ -34,7 +34,7 @@ const authReducer = (state = initialState, { type, payload }) => {
 				...state,
 				token: null,
 				isAuthenticated: false,
-				loading: false
+				isLoading: false
 			};
 
 		default:

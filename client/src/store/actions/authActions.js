@@ -17,9 +17,7 @@ export const loadUser = () => async dispatch => {
 			payload: res.data
 		});
 	} catch (err) {
-		dispatch({
-			type: AUTH_ERROR
-		});
+		dispatch({ type: AUTH_ERROR });
 	}
 };
 
@@ -50,8 +48,6 @@ export const login = ({ username, password }) => async dispatch => {
 			errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
 		}
 
-		dispatch({
-			type: LOGIN_ERROR
-		});
+		dispatch({ type: LOGIN_ERROR });
 	}
 };
