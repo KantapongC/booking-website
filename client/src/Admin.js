@@ -17,49 +17,49 @@ import EmployeeSetting from './views/Admin/Setting/Employee';
 import { loadUser } from './store/actions/authActions';
 
 class Admin extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
-		this.state = {
-			collapsed: false
-		};
-	}
+    this.state = {
+      collapsed: false
+    };
+  }
 
-	onCollapse = collapsed => {
-		this.setState({ collapsed });
-	};
+  onCollapse = collapsed => {
+    this.setState({ collapsed });
+  };
 
-	componentDidMount() {
-		this.props.loadUser();
-	}
+  componentDidMount() {
+    this.props.loadUser();
+  }
 
-	render() {
-		return (
-			<>
-				<Alert />
-				<Switch>
-					<Route exact path='/admin/login' component={Login} />
-					<Layout className='admin-layout' hasSider>
-						<Sidebar collapsed={this.state.collapsed} onCollapse={this.onCollapse} />
-						<Layout className='admin-layout'>
-							<Layout.Header className='admin-layout-header' />
-							<Layout.Content className='admin-layout-content'>
-								<div className='content-card'>
-									<PrivateRoute exact path='/admin' component={Dashboard} />
-									<PrivateRoute exact path='/admin/service' component={Service} />
-									<PrivateRoute exact path='/admin/employee' component={Employee} />
-									<PrivateRoute exact path='/admin/setting/service' component={ServiceSetting} />
-									<PrivateRoute exact path='/admin/setting/employee' component={EmployeeSetting} />
-									{/* <Redirect from='/admin' to='/admin/dashboard' /> */}
-								</div>
-							</Layout.Content>
-							<Footer />
-						</Layout>
-					</Layout>
-				</Switch>
-			</>
-		);
-	}
+  render() {
+    return (
+      <>
+        <Alert />
+        <Switch>
+          <Route exact path='/admin/login' component={Login} />
+          <Layout className='admin-layout' hasSider>
+            <Sidebar collapsed={this.state.collapsed} onCollapse={this.onCollapse} />
+            <Layout className='admin-layout'>
+              <Layout.Header className='admin-layout-header' />
+              <Layout.Content className='admin-layout-content'>
+                <div className='content-card'>
+                  <PrivateRoute exact path='/admin' component={Dashboard} />
+                  <PrivateRoute exact path='/admin/service' component={Service} />
+                  <PrivateRoute exact path='/admin/employee' component={Employee} />
+                  <PrivateRoute exact path='/admin/setting/service' component={ServiceSetting} />
+                  <PrivateRoute exact path='/admin/setting/employee' component={EmployeeSetting} />
+                  {/* <Redirect from='/admin' to='/admin/dashboard' /> */}
+                </div>
+              </Layout.Content>
+              <Footer />
+            </Layout>
+          </Layout>
+        </Switch>
+      </>
+    );
+  }
 }
 
 export default connect(null, { loadUser })(Admin);
