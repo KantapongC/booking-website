@@ -1,13 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class Employee extends Component {
   render() {
-    return (
-      <div>
-        Employee Page
-      </div>
-    )
+    return <div>Employee Page</div>;
   }
 }
 
-export default Employee
+export default Employee;

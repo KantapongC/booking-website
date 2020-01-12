@@ -8,129 +8,129 @@ import { createService, getService, updateService, deleteService } from '../../.
 import { getEmployee } from '../../../store/actions/employeeActions';
 
 const initialState = {
-	serviceName: '',
-	price: '',
-	blowDry: '',
-	coat: '',
-	customer: '',
-	cut: '',
-	hairSpa: '',
-	massage: '',
-	nail: '',
-	product: '',
-	steam: '',
-	thin: '',
-	tint: '',
-	wash: ''
+  serviceName: '',
+  price: '',
+  blowDry: '',
+  coat: '',
+  customer: '',
+  cut: '',
+  hairSpa: '',
+  massage: '',
+  nail: '',
+  product: '',
+  steam: '',
+  thin: '',
+  tint: '',
+  wash: ''
 };
 
 const options = {
-	startDate: new Date(new Date().setHours(0, 0, 0, 0)).toISOString(),
-	endDate: new Date(new Date(new Date().setHours(23, 59, 59, 999))).toISOString()
+  startDate: new Date(new Date().setHours(0, 0, 0, 0)).toISOString(),
+  endDate: new Date(new Date(new Date().setHours(23, 59, 59, 999))).toISOString()
 };
 
 class Service extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
-		this.state = {
-			visible: false,
-			selectedRecord: initialState,
-			isUpdate: false
-		};
-	}
+    this.state = {
+      visible: false,
+      selectedRecord: initialState,
+      isUpdate: false
+    };
+  }
 
-	handleOnClick = () => {
-		this.setState(prevState => ({ visible: !prevState.visible, isUpdate: false }));
-	};
+  handleOnClick = () => {
+    this.setState(prevState => ({ visible: !prevState.visible, isUpdate: false }));
+  };
 
-	handleOnCancel = () => {
-		this.setState(prevState => ({ visible: !prevState.visible, isUpdate: true }));
-	};
+  handleOnCancel = () => {
+    this.setState(prevState => ({ visible: !prevState.visible, isUpdate: true }));
+  };
 
-	handleDelete = () => {
-		const {
-			state: { selectedRecord },
-			props: { deleteService }
-		} = this;
+  handleDelete = () => {
+    const {
+      state: { selectedRecord },
+      props: { deleteService }
+    } = this;
 
-		deleteService(selectedRecord);
+    deleteService(selectedRecord);
 
-		this.setState({
-			visible: false,
-			selectedRecord: initialState
-		});
-	};
+    this.setState({
+      visible: false,
+      selectedRecord: initialState
+    });
+  };
 
-	handleAdd = async newData => {
-		const { createService } = this.props;
+  handleAdd = async newData => {
+    const { createService } = this.props;
 
-		createService(newData);
+    createService(newData);
 
-		this.setState({
-			visible: false,
-			selectedRecord: initialState
-		});
-	};
+    this.setState({
+      visible: false,
+      selectedRecord: initialState
+    });
+  };
 
-	handleUpdate = newData => {
-		const { updateService } = this.props;
+  handleUpdate = newData => {
+    const { updateService } = this.props;
 
-		updateService(newData);
+    updateService(newData);
 
-		this.setState({
-			visible: false,
-			selectedRecord: initialState
-		});
-	};
+    this.setState({
+      visible: false,
+      selectedRecord: initialState
+    });
+  };
 
-	onRowClick = record => {
-		this.setState({ visible: true, isUpdate: true, selectedRecord: record });
-	};
+  onRowClick = record => {
+    this.setState({ visible: true, isUpdate: true, selectedRecord: record });
+  };
 
-	componentDidMount() {
-		const { getService, employee, getEmployee } = this.props;
+  componentDidMount() {
+    const { getService, employee, getEmployee } = this.props;
 
-		getService(options);
+    getService(options);
 
-		if (!employee.employees) getEmployee();
-	}
+    if (!employee.employees) getEmployee();
+  }
 
-	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.service.isLoading !== this.props.service.isLoading) {
-			this.props.getService(options);
-		}
-	}
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.service.isLoading !== this.props.service.isLoading) {
+      this.props.getService(options);
+    }
+  }
 
-	render() {
-		const { service } = this.props;
-		const data = service.services ? service.services.docs : null;
+  render() {
+    const { service } = this.props;
+    const data = service.services ? service.services.docs : null;
 
-		return (
-			<>
-				<Button onClick={this.handleOnClick} icon='plus' style={{ marginBottom: 16 }} shape='round' size='large'>
-					เพิ่มรายการใหม่
-				</Button>
-				<ServiceModal
-					visible={this.state.visible}
-					onCancel={this.handleOnCancel}
-					onOk={this.handleAdd}
-					record={this.state.selectedRecord}
-					isUpdate={this.state.isUpdate}
-					handleUpdate={this.handleUpdate}
-					onDelete={this.handleDelete}
-				/>
-				<MenuTable title='รายการวันนี้' tableHeader={serviceHeader} tableData={data} handleDelete={this.handleDelete} onRowClick={this.onRowClick} />
-			</>
-		);
-	}
+    return (
+      <>
+        <Button onClick={this.handleOnClick} icon='plus' style={{ marginBottom: 16 }} shape='round' size='large'>
+          เพิ่มรายการใหม่
+        </Button>
+        <ServiceModal
+          visible={this.state.visible}
+          onCancel={this.handleOnCancel}
+          onOk={this.handleAdd}
+          record={this.state.selectedRecord}
+          isUpdate={this.state.isUpdate}
+          handleUpdate={this.handleUpdate}
+          onDelete={this.handleDelete}
+        />
+        <MenuTable title='รายการวันนี้' tableHeader={serviceHeader} tableData={data} handleDelete={this.handleDelete} onRowClick={this.onRowClick} />
+      </>
+    );
+  }
 }
 
 const mapStateToProps = state => {
-	return {
-		service: state.service,
-		employee: state.employee
-	};
+  return {
+    service: state.service,
+    employee: state.employee
+  };
 };
 
 export default connect(mapStateToProps, { createService, getService, updateService, deleteService, getEmployee })(Service);
