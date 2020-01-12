@@ -2,12 +2,10 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const PrivateRoute = ({ component: Component, auth: { isAuthenticated, loading }, ...rest }) => (
-	<Route {...rest} render={props => (!isAuthenticated && !loading ? <Redirect to='/admin/login' /> : <Component {...props} />)} />
+const PrivateRoute = ({ component: Component, auth: { isAuthenticated, isLoading }, ...rest }) => (
+	<Route {...rest} render={props => (!isAuthenticated && !isLoading ? <Redirect to='/admin/login' /> : <Component {...props} />)} />
 );
 
-const mapStateToProps = state => ({
-	auth: state.auth
-});
+const mapStateToProps = state => ({ auth: state.auth });
 
-export default connect(mapStateToProps)(React.memo(PrivateRoute));
+export default connect(mapStateToProps)(PrivateRoute);

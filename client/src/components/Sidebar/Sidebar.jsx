@@ -22,20 +22,11 @@ class Sidebar extends Component {
 		return (
 			<Layout.Sider collapsible collapsed={collapsed} onCollapse={onCollapse} width='300' breakpoint='lg'>
 				<div className='sidebar-logo'>
-					<img
-						className={!collapsed ? 'sidebar-logo-img' : null}
-						src={collapsed ? salonSpinnerlogo : logo}
-						alt='Logo'
-					/>
+					<img className={!collapsed ? 'sidebar-logo-img' : null} src={collapsed ? salonSpinnerlogo : logo} alt='Logo' />
 				</div>
-				<Menu
-					theme='dark'
-					defaultSelectedKeys={['admin/dashboard']}
-					selectedKeys={[this.state.selectedKey]}
-					mode='inline'
-					onSelect={this.onSelect}>
-					<Menu.Item key='admin/dashboard'>
-						<Link to='/admin/dashboard'>
+				<Menu theme='dark' defaultSelectedKeys={['admin']} defaultOpenKeys={['setting-submenu']} selectedKeys={[this.state.selectedKey]} mode='inline' onSelect={this.onSelect}>
+					<Menu.Item key='admin'>
+						<Link to='/admin'>
 							<Icon type='line-chart' />
 							<span>สรุปรายการ</span>
 						</Link>

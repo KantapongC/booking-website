@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
 import { Button } from 'antd';
 import { serviceHeader } from '../../../variables/Variables';
 import MenuTable from '../../../components/Table/Table';
 import ServiceModal from '../../../components/Modal/ServiceModal';
-// import { createService, updateService, deleteService } from '../../../store/actions/serviceActions';
+import { createService, getService, updateService, deleteService } from '../../../store/actions/serviceActions';
+import { getEmployee } from '../../../store/actions/employeeActions';
 
 const initialState = {
 	serviceName: '',
@@ -23,6 +22,11 @@ const initialState = {
 	thin: '',
 	tint: '',
 	wash: ''
+};
+
+const options = {
+	startDate: new Date(new Date().setHours(0, 0, 0, 0)).toISOString(),
+	endDate: new Date(new Date(new Date().setHours(23, 59, 59, 999))).toISOString()
 };
 
 class Service extends Component {
@@ -58,7 +62,7 @@ class Service extends Component {
 		});
 	};
 
-	handleAdd = newData => {
+	handleAdd = async newData => {
 		const { createService } = this.props;
 
 		createService(newData);
@@ -84,16 +88,23 @@ class Service extends Component {
 		this.setState({ visible: true, isUpdate: true, selectedRecord: record });
 	};
 
+	componentDidMount() {
+		const { getService, employee, getEmployee } = this.props;
+
+		getService(options);
+
+		if (!employee.employees) getEmployee();
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.service.isLoading !== this.props.service.isLoading) {
+			this.props.getService(options);
+		}
+	}
+
 	render() {
-		const { services } = this.props;
-		const data = services
-			? services.map(service => {
-					return {
-						...service,
-						key: service.id
-					};
-			  })
-			: null;
+		const { service } = this.props;
+		const data = service.services ? service.services.docs : null;
 
 		return (
 			<>
@@ -117,24 +128,9 @@ class Service extends Component {
 
 const mapStateToProps = state => {
 	return {
-		// services: state.firestore.ordered.services
+		service: state.service,
+		employee: state.employee
 	};
 };
 
-const mapDispatchToProps = dispatch => {
-	return {
-		// createService: service => dispatch(createService(service)),
-		// updateService: service => dispatch(updateService(service)),
-		// deleteService: service => dispatch(deleteService(service))
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Service);
-
-// export default compose(
-// 	connect(
-// 		mapStateToProps,
-// 		mapDispatchToProps
-// 	),
-// 	firestoreConnect([{ collection: 'services' }])
-// )(Service);
+export default connect(mapStateToProps, { createService, getService, updateService, deleteService, getEmployee })(Service);

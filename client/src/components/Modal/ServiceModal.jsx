@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-// import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
 import { Form, Input, Modal, Select, InputNumber, Row, Col, Button } from 'antd';
 import { serviceItems } from '../../variables/Variables';
 
@@ -41,7 +39,7 @@ class ServiceModal extends PureComponent {
 	};
 
 	render() {
-		const { record, form, onCancel, visible, isUpdate, onDelete, employees } = this.props;
+		const { record, form, onCancel, visible, isUpdate, onDelete, employee } = this.props;
 		const { getFieldDecorator } = form;
 
 		return (
@@ -80,7 +78,7 @@ class ServiceModal extends PureComponent {
 											]
 										})(
 											item.hasOptions ? (
-												<Select>{employees && employees.map(employee => <Option value={employee.username}>{employee.username}</Option>)}</Select>
+												<Select>{employee.employees && employee.employees.docs.map(employee => <Option value={employee.username}>{employee.username}</Option>)}</Select>
 											) : item.type === 'number' ? (
 												<InputNumber defaultValue={0} formatter={value => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={value => value.replace(/฿\s?|(,*)/g, '')} />
 											) : (
@@ -102,12 +100,8 @@ const ServiceModalForm = Form.create()(ServiceModal);
 
 const mapStateToProps = state => {
 	return {
-		employees: state.firestore.ordered.employees
+		employee: state.employee
 	};
 };
 
 export default connect(mapStateToProps)(ServiceModalForm);
-// export default compose(
-// 	connect(mapStateToProps),
-// 	firestoreConnect([{ collection: 'employees' }])
-// )(ServiceModalForm);

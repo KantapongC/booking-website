@@ -6,7 +6,7 @@ const getTokenFromHeader = req => {
 	if (xauthToken) return xauthToken;
 
 	const bearerToken = req.header('Authorization');
-	if (bearerToken.split(' ')[0] === 'Bearer') return bearerToken.split(' ')[1];
+	if (bearerToken && bearerToken.split(' ')[0] === 'Bearer') return bearerToken.split(' ')[1];
 
 	return false;
 };

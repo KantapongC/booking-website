@@ -41,7 +41,7 @@ router.post(
 // @desc    READ services
 // @access  Private
 router.get('/', authenticate, async (req, res, next) => {
-	const { startDate, endDate, page, limit } = req.body;
+	const { startDate, endDate, page, limit } = req.query;
 
 	try {
 		const options = {

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { LOGIN_SUCCESS, LOGIN_ERROR, USER_LOADED, AUTH_ERROR } from './types';
 import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
+
 // Load User
 export const loadUser = () => async dispatch => {
 	if (localStorage.token) {
@@ -16,9 +17,7 @@ export const loadUser = () => async dispatch => {
 			payload: res.data
 		});
 	} catch (err) {
-		dispatch({
-			type: AUTH_ERROR
-		});
+		dispatch({ type: AUTH_ERROR });
 	}
 };
 
@@ -49,8 +48,6 @@ export const login = ({ username, password }) => async dispatch => {
 			errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
 		}
 
-		dispatch({
-			type: LOGIN_ERROR
-		});
+		dispatch({ type: LOGIN_ERROR });
 	}
 };
