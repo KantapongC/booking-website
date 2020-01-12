@@ -25,9 +25,9 @@ export const createServiceRules = newService => async dispatch => {
 
 export const getServiceRules = () => async dispatch => {
   try {
-    const res = await axios.get('api/servicerules/');
+    const res = await axios.get('/api/servicerules/');
 
-    dispatch({ type: GET_SETTING_SERVICE_SUCCESS, payload: res.data });
+    dispatch({ type: GET_SETTING_SERVICE_SUCCESS, payload: res.data.result });
   } catch (error) {
     dispatch({ type: GET_SETTING_SERVICE_ERROR, error });
   }

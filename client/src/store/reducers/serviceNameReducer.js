@@ -29,7 +29,7 @@ const serviceRulesReducer = (state = INITIAL_STATE, { type, payload, error }) =>
     case GET_SETTING_SERVICE_SUCCESS:
       return {
         ...state,
-        servicerules: payload
+        serviceRules: payload
       };
 
     case GET_SETTING_SERVICE_ERROR:
