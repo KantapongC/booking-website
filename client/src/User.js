@@ -12,26 +12,26 @@ import Contact from './views/User/Contact/Contact';
 import Booking from './views/User/Booking/Booking';
 
 class User extends Component {
-	render() {
-		return (
-			<Layout className='user-layout'>
-				<Layout.Header className='user-layout-header'>
-					<Navbar />
-				</Layout.Header>
-				<Layout.Content>
-					<Switch>
-						<Route exact path='/' component={Home} />
-						<Route path='/about' component={About} />
-						<Route path='/pricelist' component={PriceList} />
-						<Route path='/staff' component={Staff} />
-						<Route path='/contact' component={Contact} />
-						<Route path='/booking' component={Booking} />
-					</Switch>
-				</Layout.Content>
-				<Footer darkBackground />
-			</Layout>
-		);
-	}
+  render() {
+    return (
+      <Layout className='user-layout'>
+        <Layout.Header className='user-layout-header'>
+          <Navbar />
+        </Layout.Header>
+        <Layout.Content>
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route path='/about' component={About} />
+            <Route path='/pricelist' component={PriceList} />
+            <Route path='/staff' component={Staff} />
+            <Route path='/contact' component={Contact} />
+            <Route path='/booking' component={Booking} />
+          </Switch>
+        </Layout.Content>
+        <Footer darkBackground />
+      </Layout>
+    );
+  }
 }
 
 export default User;

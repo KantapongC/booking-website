@@ -20,19 +20,19 @@ const middleware = [thunk];
 const store = createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));
 
 if (localStorage.token) {
-	setAuthToken(localStorage.token);
+  setAuthToken(localStorage.token);
 }
 
 ReactDOM.render(
-	<Provider store={store}>
-		<Router>
-			<Switch>
-				<Route path='/admin' component={Admin} />
-				<Route component={User} />
-			</Switch>
-		</Router>
-	</Provider>,
-	document.getElementById('root')
+  <Provider store={store}>
+    <Router>
+      <Switch>
+        <Route path='/admin' component={Admin} />
+        <Route component={User} />
+      </Switch>
+    </Router>
+  </Provider>,
+  document.getElementById('root')
 );
 
 serviceWorker.unregister();

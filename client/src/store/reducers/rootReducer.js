@@ -5,10 +5,10 @@ import serviceReducer from './serviceReducer';
 import alert from './alert';
 
 const rootReducer = combineReducers({
-	auth: authReducer,
-	service: serviceReducer,
-	employee: employeeReducer,
-	alert
+  auth: authReducer,
+  service: serviceReducer,
+  employee: employeeReducer,
+  alert
 });
 
 export default rootReducer;
