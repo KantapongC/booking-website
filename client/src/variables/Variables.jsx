@@ -9,14 +9,16 @@ export const serviceHeader = [
     dataIndex: 'serviceName',
     align: 'center',
     editable: true,
-    fixed: 'left'
+    fixed: 'left',
+    width: 80
   },
   {
     title: 'ราคา',
     dataIndex: 'price',
     align: 'center',
     editable: true,
-    fixed: 'left'
+    fixed: 'left',
+    width: 80
   },
   {
     title: 'สระ',
@@ -89,7 +91,8 @@ export const serviceHeader = [
     dataIndex: 'customer',
     align: 'center',
     editable: true,
-    fixed: 'right'
+    fixed: 'right',
+    width: 80
   }
 ];
 

@@ -49,7 +49,7 @@ router.get('/', authenticate, async (req, res, next) => {
       limit: parseInt(limit) || 20
     };
 
-    const pipeline = [{ $match: { $and: [{ createdAt: { $gte: new Date(startDate) }, createdAt: { $lte: new Date(endDate) } }] } }];
+    const pipeline = [{ $match: { $and: [{ createdAt: { $gte: new Date(startDate) } }, { createdAt: { $lte: new Date(endDate) } }] } }];
 
     const services = await Service.aggregatePaginate(Service.aggregate(pipeline), options);
 

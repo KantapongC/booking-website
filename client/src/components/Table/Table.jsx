@@ -16,7 +16,7 @@ const MenuTable = ({ tableHeader, title, tableData, onRowClick }) => {
         </h2>
       )}
       bordered
-      scroll={{ x: 1060 }}
+      scroll={{ x: 1300 }}
       // pagination={{ position: 'bottom' }}
       pagination={false}
       onRowClick={onRowClick}
