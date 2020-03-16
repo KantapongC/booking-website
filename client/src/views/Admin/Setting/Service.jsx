@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import ServiceNameCard from '../../../components/Card/ServiceNameCard';
 import ServiceNameModal from '../../../components/Modal/ServiceNameModal';
 import { Row, Col, Button } from 'antd';
-// import { createServiceName } from '../../../store/actions/serviceNameActions';
-// import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
+import { createServiceRules, getServiceRules, updateServiceRule, deleteServiceRule } from '../../../store/actions/serviceNameActions';
 
 const newServiceName = {
   serviceName: '',
@@ -42,18 +40,22 @@ class ServiceSetting extends PureComponent {
 
   handleOnClose = () => {};
 
+  componentDidMount() {
+    this.props.getServiceRules();
+  }
+
   render() {
-    const { serviceName, createServiceName } = this.props;
+    const { serviceRules, createServiceRules } = this.props;
 
     return (
       <>
         <Button onClick={this.handleOnClick} icon='plus' style={{ marginBottom: 16 }} shape='round' size='large'>
           ตั้งค่ารายการใหม่
         </Button>
-        <ServiceNameModal visible={this.state.showModal} record={this.state.selected} closeModal={this.handleOnClick} onOk={createServiceName}></ServiceNameModal>
+        <ServiceNameModal visible={this.state.showModal} record={this.state.selected} closeModal={this.handleOnClick} onOk={createServiceRules}></ServiceNameModal>
         <Row>
-          {serviceName &&
-            serviceName.map(name => (
+          {serviceRules &&
+            serviceRules.map(name => (
               <Col md={24} style={{ paddingBottom: '24px' }}>
                 <ServiceNameCard heading={name.serviceName} subHeading={name.price} content={name} />
               </Col>
@@ -66,22 +68,8 @@ class ServiceSetting extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    // serviceName: state.sampleFirestore.ordered.serviceName
-    // // state.firestore.ordered.serviceName
+    serviceRules: state.serviceSetting.serviceRules
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    // createServiceName: serviceName => dispatch(createServiceName(serviceName))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ServiceSetting);
-// export default compose(
-// 	connect(
-// 		mapStateToProps,
-// 		mapDispatchToProps
-// 	),
-// 	firestoreConnect([{ collection: 'serviceName' }])
-// )(ServiceSetting);
+export default connect(mapStateToProps, { createServiceRules, getServiceRules, updateServiceRule, deleteServiceRule })(ServiceSetting);
